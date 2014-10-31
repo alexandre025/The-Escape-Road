@@ -27,12 +27,31 @@ var server = {
 				};
 			}while(!unique);
 			server.roomList.push(roomID);
-			socket.join(roomID);
-			console.log('New room ID :'+server.roomList);
+			socket.join(roomID+'');
+			console.log('New room ID : '+roomID);
 			socket.emit('room join',roomID); // Communicate the room ID to the desktop
 		});
 
+		socket.on('mobile connection',function(roomID){
+			console.log('Try to connect a mobile to : '+roomID);
+			for (var i = 0; i < server.roomList.length; i++) {
+				if(server.roomList[i] == roomID){
+					socket.join(roomID+'');
+					socket.emit('room join');
+					console.log('... SUCCESFULL !!')
+				}
+				else{
+					socket.emit('wrong roomID');
+					console.log('... ERROR !!')
+				}
+			};
+		});
+
 		socket.on('desktop event',function(data){
+			server.io.to(roomID).emit('desktop event',data);
+		});
+
+		socket.on('disconnect',function(){
 
 		});
 
