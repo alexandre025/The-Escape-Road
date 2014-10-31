@@ -19,17 +19,17 @@ var server = {
 				unique = true;
 
 			do{ // Generate a unique roomID
-				roomID = Math.round(Math.random()*1000); 
+				roomID = Math.round(Math.random()*999) + Math.round((Math.random()*8)+1)*1000; 
 				for (var i = 0; i < server.roomList.length; i++){
-					if(server.roomList[i] == roomID){ 
+					if(server.roomList[i] == roomID){
 						unique = false;
 					} 
 				};
-			}while(unique);
+			}while(!unique);
 			server.roomList.push(roomID);
 			socket.join(roomID);
-			console.log(server.roomList);
-			socket.emit('room join',roomID);
+			console.log('New room ID :'+server.roomList);
+			socket.emit('room join',roomID); // Communicate the room ID to the desktop
 		});
 
 		socket.on('desktop event',function(data){
@@ -37,5 +37,5 @@ var server = {
 		});
 
 	}
-}
+};
 server.init();
