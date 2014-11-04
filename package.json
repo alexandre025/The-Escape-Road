@@ -1,0 +1,23 @@
+{
+  "name": "The-Escape-Road",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "socket.io": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexandre025/The-Escape-Road.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexandre025/The-Escape-Road/issues"
+  },
+  "homepage": "https://github.com/alexandre025/The-Escape-Road"
+}
