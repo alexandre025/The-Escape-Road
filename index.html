@@ -3,16 +3,26 @@
 <head>
 	<meta charset="utf-8">
 	<title>The Escape Road</title>
-	<link rel="stylesheet" href="src/css/style.css">
+	<link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body>	
+	<nav>
+		<span id='button_menu'></span>
+		<ul>
+			<li></li>
+		</ul>
+	</nav>
+	<div id='activeContent'>
+
 		<span id="onOff"></span>
 		<div id="cacheVideo"></div>
 		
-		<video id="video">
-			<source src="src/video/v06-07_ld.mp4">
-			<span class="event" data-time="5"></span>
+		<video id="video_intro">
+			<source src="video/video_intro.webm" type="video/webm">
+			<source src="video/video_intro.ogg" type="video/ogg">
+			<source src="video/video_intro.m4v" type="video/m4v">
 		</video>
+
 
 		<div id="textIntro">
 				<img src="" alt="logo">
@@ -21,16 +31,21 @@
 				</p>
 				<p>
 					<div id="buttonStart">
-						<a href="#">Start Expérience</a>
+						<a href="inc/sk_1.html" class='nextContent' data-direction='bottom'>Start Expérience</a>
 					</div>
 				</p>
 		</div>	
-				
-	
+
+	</div>
+
+	<div id='nextContent'>
+
+	</div>
+
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script type="text/javascript" src="js/model.js"></script>
 	<script type="text/javascript" src="js/UI.js"></script>
 	<script type="text/javascript" src="js/controller.js"></script>
-	<script type="text/javascript" src="src/js/video.js"></script>
+	<script type="text/javascript" src="js/video.js"></script>	
 </body>
 </html>

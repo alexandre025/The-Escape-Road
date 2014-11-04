@@ -12,6 +12,9 @@ var controller = {
 		});
 
 		controller.generateAjaxLink();
+
+		// Initialisation de la video
+		controller.init_video_intro();
 	},
 
 	ajaxLoad : function(e){
@@ -23,6 +26,7 @@ var controller = {
 		model.importContent(href,function(){
 			UI.switchContent(direction);
 			controller.generateAjaxLink();
+			// Here we have to use js for the new loaded page 
 		});
 	},
 
@@ -32,6 +36,10 @@ var controller = {
 		for (var i = 0; i < a.length; i++) {
 			a[i].addEventListener('click',controller.ajaxLoad,false);
 		};
+	},
+
+	init_video_intro : function(){
+
 	}
 
 };

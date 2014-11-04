@@ -1,57 +1,9 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
 body, html {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
+	background-image: url('../img/back.jpg');
+	z-index: 1;
 
 }
 
@@ -60,8 +12,8 @@ body, html {
 	height: 100%;
 	display: block;
 	position:absolute;
-	background-color: red;
-	z-index: -1;
+	z-index: 2;
+	opacity:0;
 }
 
 #activeContent {
@@ -71,21 +23,21 @@ body, html {
 	left: 0px;
 	display: block;
 	position: absolute;
-	background-color: green;
+	z-index: 3;
+
 }
 
-.initial_top {top:-100%;}
-.initial_top > {top:inherit;}
-
-.initial_bottom {top:100%;}
-.initial_bottom > {top:inherit;}
-
-.initial_left {left:-100%;}
-.initial_left > {left:inherit;}
-
-.initial_right {left:100%;}
-.initial_right > {left:inherit;}
-
+nav {
+	position:absolute;
+	top:0px;
+	left:0px;
+	background-color: yellow;
+	z-index:-15;
+	display: block;
+	width:50px;
+	height: 50px;
+	opacity: 0;
+}
 
 
 

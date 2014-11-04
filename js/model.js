@@ -25,6 +25,18 @@ var model = {
   	
 		xmlhttp.open("GET",href,true);
 		xmlhttp.send();
+	},
+
+	intro_loader :function(){
+
+	},
+
+	intro_progress : function(){
+
+	},
+
+	intro_muted : function(){
+
 	}
 
 	
