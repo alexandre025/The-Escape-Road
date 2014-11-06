@@ -1,3 +1,15 @@
+body {
+	position: absolute;
+	margin: 0px;
+    padding: 0px;
+	height: 100%;
+    width: 100%;
+    overflow: hidden;   
+    top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
 
 .cacheVideo {
 	position: absolute;
@@ -5,6 +17,7 @@
 	top: 0;
 	right: 0;
 	left: 0;
+	bottom: 0;
 	min-width: 100%;
 	min-height: 100%;
 	width: auto;
@@ -28,10 +41,9 @@
 
 video {
 	position: absolute;
-	height: 100%;
 	width: 100%;
+	height: auto;
 	z-index: -100;
-
 }
 
 #textIntro {
@@ -39,11 +51,13 @@ video {
 }
 
 .textIntro {
-	width: 50%;
-	margin: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -185px 0 0 -315px;
+	width: 44%;
+	/*margin: auto;*/
 	text-align: center;
-	padding: 50px;
-	margin-top: 150px;
 	-webkit-animation: arrives 3s;
 	animation: arrives 3s;
 }
@@ -58,9 +72,20 @@ video {
 	100% {opacity: 1;}
 }
 
+.textIntro img {
+	width: 250px;
+}
+
 .textIntro p {
+	margin-top: 20px;
 	color: white;
-	padding: 30px 0;
+	font-size: 20px;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-weight: 400;
+}
+
+#buttonStart {
+	margin-top: 45px;
 }
 
 #buttonStart a {
@@ -68,24 +93,38 @@ video {
 	padding: 10px 20px 10px 20px;
 	text-decoration: none;
 	color: white;
+	font-size: 25px;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+	-webkit-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
 }
 
+#buttonStart a:hover {
+	color:rgba(0,0,0,0.7);
+	background-color: white;
+	opacity: .7;
+}
+
+
 .on {
-	background: url(../images/sound_on.png) no-repeat;
+	background: url(../img/volume_on.png) no-repeat;
 	position: absolute;
-	top: 0;
-	height: 31px;
-	width: 37px;
+	bottom: 0;
+	right: 0;
+	height: 35px;
+	width: 35px;
 	cursor: pointer;
 	z-index: 100;
+	margin: 10px;
 }
 
 .off {
-	background: url(../images/sound_off.png) no-repeat;
+	background: url(../img/volume_off.png) no-repeat;
 	position: absolute;
 	top: 0;
-	height: 31px;
-	width: 37px;
+	height: 35px;
+	width: 35px;
 	cursor: pointer;
 	z-index: 100;
 }

@@ -18,19 +18,19 @@ function loaded() {
 }
 
 
-function muted() {
-	if(video_intro.muted == false) {
-		video_intro.muted = true;
-		mute.classList.remove('on');
-		mute.classList.add('off');
-	}
+// function muted() {
+// 	if(video_intro.muted == false) {
+// 		video_intro.muted = true;
+// 		mute.classList.remove('on');
+// 		mute.classList.add('off');
+// 	}
 
-	else {
-		video_intro.muted = false;
-		mute.classList.add('on');
-		mute.classList.remove('off');
-	}
-}
+// 	else {
+// 		video_intro.muted = false;
+// 		mute.classList.add('on');
+// 		mute.classList.remove('off');
+// 	}
+// }
 
 function progress() {
 	var self = this
