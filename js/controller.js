@@ -20,14 +20,28 @@ var controller = {
 	ajaxLoad : function(e){
 
 		e.preventDefault();
-		console.log(e);
 		var href = this.href;
+		var splited = href.split('/');
+		splited = splited[splited.length-1];
+		console.log(splited);
 		var direction = this.getAttribute('data-direction');
-		model.importContent(href,function(){
-			UI.switchContent(direction);
-			controller.generateAjaxLink();
-			// Here we have to use js for the new loaded page 
-		});
+		if(splited == 'after_intro'){ // If we have the main page
+			model.importAfterIntro(function(){
+				UI.switchContent(direction);
+			});
+		}
+		else if(splited == 'the_map'){ // If we have the road map
+			model.importTheMap(function(){
+				UI.switchContent(direction);
+			});
+		}
+		else{ // classical content 
+			model.importContent(href,function(){
+				UI.switchContent(direction);
+				// Here we have to use js for the new loaded page 
+			});
+		}
+		controller.generateAjaxLink();
 	},
 
 	generateAjaxLink : function(){

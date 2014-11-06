@@ -1,0 +1,45 @@
+[
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": -100 }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "saturation": -100 }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative.province",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "visibility": "simplified" }
+    ]
+  }
+]

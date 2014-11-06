@@ -14,34 +14,34 @@ video_intro.play();
 
 function loaded() {
 	video_intro.play();
+	video_intro.muted = false;
 	mute.classList.add('on');
 }
 
 
-// function muted() {
-// 	if(video_intro.muted == false) {
-// 		video_intro.muted = true;
-// 		mute.classList.remove('on');
-// 		mute.classList.add('off');
-// 	}
+function muted() {
+ 	if(video_intro.muted == false) {
+ 		video_intro.muted = true;
+ 		mute.classList.remove('on');
+ 		mute.classList.add('off');
+ 	}
 
-// 	else {
-// 		video_intro.muted = false;
-// 		mute.classList.add('on');
-// 		mute.classList.remove('off');
-// 	}
-// }
+ 	else {
+ 		video_intro.muted = false;
+ 		mute.classList.add('on');
+ 		mute.classList.remove('off');
+ 	}
+ }
 
 function progress() {
 	var self = this
 	var current_time = Math.round(self.currentTime*100/self.duration);
 
 
-	if(current_time == 5) {
+	if(current_time == 0) {
 		cache_video.classList.add('cacheVideo');
 		intro.style.display="block";
 		intro.classList.add('textIntro');
 	}	
 	
 }
-
