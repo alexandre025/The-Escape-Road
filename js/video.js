@@ -1,4 +1,4 @@
-"use strict";
+/*"use strict";
 
 var video_intro = document.getElementById('video_intro');
 var cache_video = document.getElementById('cacheVideo');
@@ -45,3 +45,4 @@ function progress() {
 	}	
 	
 }
+*/

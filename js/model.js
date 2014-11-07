@@ -28,7 +28,6 @@ var model = {
 	},
 
 	importTheMap : function(callback){
-		// Here we have to generate the road map
         var mapStyle = 
 		[
   {
@@ -80,9 +79,9 @@ var model = {
 		var mapOptions = {
           center: { lat: 17.716116, lng: 8.000741},
           zoom: 3,
+          minZoom:2,
           disableDefaultUI: true
         };
-        // Ajouter un node map-canvas dans next-content
         var container = document.createElement('div');
         container.setAttribute('id','map-canvas');
         document.getElementById('nextContent').appendChild(container);
@@ -90,6 +89,7 @@ var model = {
             mapOptions);
         map.setOptions({styles: mapStyle});
 
+        // SET THE MARKERS HERE 
 
         callback.call(this);
 	},
@@ -103,18 +103,29 @@ var model = {
 			right = Math.round((Math.random()*10)+1);
 		}while(left == right); 
 
+    var nextContent = document.getElementById('nextContent');
+    var container = document.createElement('div').setAttribute('id','left');
+    nextContent.appendChild(container);
+    container = document.createElement('div').setAttribute('id','right');
+    nextContent.appendChild(container);
+
 		var xmlhttp = new XMLHttpRequest();
+    var once = true;
 
   		xmlhttp.onreadystatechange=function(){
-	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	    	{
-	    		document.getElementById("nextContent").innerHTML = xmlhttp.responseText;
+	  		if(xmlhttp.readyState==4 && xmlhttp.status==200 && once == true){
+	    		document.getElementById('left').innerHTML = xmlhttp.responseText;
+          once = false;
 	    	}
+        else if(xmlhttp.readyState==4 && xmlhttp.status==200 && once == false){
+          document.getElementById('right').innerHTML = xmlhttp.responseText;
+          once = false;          
+        }
     	}
   	
 		xmlhttp.open("GET",'inc/left/sk_'+left+'.html',true);
 		xmlhttp.send();
-		xmlhttp.open("GET",'inc/left/sk_'+right+'.html',true);
+		xmlhttp.open("GET",'inc/right/sk_'+right+'.html',true);
 		xmlhttp.send();
 
 		callback.call(this);
