@@ -90,6 +90,8 @@ var model = {
         map.setOptions({styles: mapStyle});
 
         // SET THE MARKERS HERE 
+        markers = new Array();
+        markers[0] = new google.maps.Marker({map:map,position: google.maps.LatLng(0,0)});
 
         callback.call(this);
 	},
@@ -128,6 +130,19 @@ var model = {
 		xmlhttp.open("GET",'inc/right/sk_'+right+'.html',true);
 		xmlhttp.send();
 
+    var bgChoice = document.querySelectorAll('.bg-choice a');
+    var choice = document.getElementById('choice');
+
+    for (var i = 0; i < bgChoice.length; i++) {
+      bgChoice[i].addEventListener('mouseover',bgChoiceMouseover,false);
+      bgChoice[i].addEventListener('mouseleave',bgChoiceMouseleave,false);
+    };
+    function bgChoiceMouseover(){
+      this.parentNode.classList.add('zoom-bg');
+    }
+    function bgChoiceMouseleave(){
+      this.parentNode.classList.remove('zoom-bg');
+    }
 		callback.call(this);
 
 	}

@@ -12,7 +12,7 @@ var controller = {
 		});
 
 		controller.generateAjaxLink();
-
+		controller.initMenu();
 		// Initialisation de la video
 		controller.init_video_intro();
 	},
@@ -72,7 +72,6 @@ var controller = {
 			mute.classList.add('on');
 		}
 
-
 		function muted() {
 		 	if(video_intro.muted == false) {
 		 		video_intro.muted = true;
@@ -105,7 +104,25 @@ var controller = {
 			video_intro.muted = true;
 			mute.classList.add('off');
 		}
+	},
+	initMenu : function(){ // Non MVC
+		var menuAll = document.getElementById('menu-all');		
+		var menuIcon = document.getElementById('menu-icon');
+		var menuList = document.getElementsByClassName('menu-items')[0];
+
+		menuAll.addEventListener('mouseover',function(){
+			menuIcon.classList.toggle('menu-hover');
+		},false);
+		menuAll.addEventListener('mouseout',function(){
+			menuIcon.classList.toggle('menu-hover');
+		},false);
+
+		menuAll.addEventListener('click',function(){
+			menuIcon.classList.toggle('menu-on');
+			menuList.classList.toggle('menu-off');
+		},false);
 	}
+
 
 };
 controller.init();
