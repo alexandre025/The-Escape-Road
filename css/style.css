@@ -60,6 +60,9 @@ nav {
 	margin: 30px 0 0 30px;
 	text-transform: uppercase;
 	display: inline-block;
+	color : white;
+	font-family: 'Yanone Kaffeesatz';
+	text-align: center;
 }
 
 #menu-icon {
@@ -71,6 +74,10 @@ nav {
     -o-transition: all 0.2s ease-in-out 0s;
     -ms-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
+}
+
+.menu-legend {
+	display: block;
 }
 
 #menu-icon span {
@@ -129,9 +136,13 @@ nav ul li, nav ul {
 nav ul{
 	position: absolute;
 	top:30px;
-	left: 50px;
+	left: 100px;
 	width: 300px;
-	transition: all 1s;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 	opacity:1;
 }
 
@@ -140,6 +151,8 @@ nav ul{
 	left:-300px;
 	opacity: 0;
 }
+
+
 
 
 
