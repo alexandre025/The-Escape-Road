@@ -23,7 +23,7 @@ var UI = {
 		}
 
 		setTimeout(function(){
-			previous.id = 'nextcontent';
+			previous.id = 'nextContent';
 			previous.style.cssText = '';
 			previous.innerHTML = '';
 			now.id = 'activeContent';

@@ -99,36 +99,40 @@ var model = {
 	importAfterIntro : function(callback){
 		// Generate two random number
 
-		var left  = Math.round((Math.random()*10)+1),
+		var left  = Math.round((Math.random()*7)+1),
 			right;
 		do{
-			right = Math.round((Math.random()*10)+1);
+			right = Math.round((Math.random()*7)+1);
 		}while(left == right); 
+    console.log(left+' '+right);
 
     var nextContent = document.getElementById('nextContent');
-    var container = document.createElement('div').setAttribute('id','left');
+    console.log(nextContent);
+    var container = document.createElement('div');
+    container.setAttribute('id','left');
     nextContent.appendChild(container);
-    container = document.createElement('div').setAttribute('id','right');
+    container = document.createElement('div');
+    container.setAttribute('id','right');
     nextContent.appendChild(container);
 
-		var xmlhttp = new XMLHttpRequest();
-    var once = true;
+		var xmlhttp_left = new XMLHttpRequest();
+    var xmlhttp_right = new XMLHttpRequest();
 
-  		xmlhttp.onreadystatechange=function(){
-	  		if(xmlhttp.readyState==4 && xmlhttp.status==200 && once == true){
-	    		document.getElementById('left').innerHTML = xmlhttp.responseText;
-          once = false;
-	    	}
-        else if(xmlhttp.readyState==4 && xmlhttp.status==200 && once == false){
-          document.getElementById('right').innerHTML = xmlhttp.responseText;
-          once = false;          
+  		xmlhttp_left.onreadystatechange=function(){
+	  		if(xmlhttp_left.readyState==4 && xmlhttp_left.status==200){
+	    		document.getElementById('left').innerHTML = xmlhttp_left.responseText;
         }
     	}
+      xmlhttp_right.onreadystatechange=function(){
+        if(xmlhttp_right.readyState==4 && xmlhttp_right.status==200){
+          document.getElementById('right').innerHTML = xmlhttp_right.responseText;
+        }
+      }
   	
-		xmlhttp.open("GET",'inc/left/sk_'+left+'.html',true);
-		xmlhttp.send();
-		xmlhttp.open("GET",'inc/right/sk_'+right+'.html',true);
-		xmlhttp.send();
+		xmlhttp_left.open("GET",'inc/left/left_sk_1.html',true);
+		xmlhttp_left.send();
+		xmlhttp_right.open("GET",'inc/right/right_sk_1.html',true);
+		xmlhttp_right.send();
 
     var bgChoice = document.querySelectorAll('.bg-choice a');
     var choice = document.getElementById('choice');
