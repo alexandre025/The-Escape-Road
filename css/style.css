@@ -81,10 +81,6 @@ nav {
     border: 2px solid #FFFFFF;
 }
 
-.menu-legend {
-	display: block;
-}
-
 #menu-icon span {
 	height: 3px;
 	width: 25px;
@@ -97,9 +93,6 @@ nav {
 }
 
 .menu-hover {
-	/*border-radius: 2px;
-	-moz-border-radius: 2px;
-    -webkit-border-radius: 2px;*/
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -133,6 +126,9 @@ nav #menu-icon .bottom {
   -ms-transition: rotate(-45deg) translate(6px, -6px);
   transform: rotate(-45deg) translate(6px, -6px);
 }
+.menu-on{
+	background-color: rgba(0, 0, 0, 0.6);
+}
 
 
 nav ul li, nav ul {
@@ -155,7 +151,7 @@ nav ul{
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
 	opacity:1;
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0,0,0,0.6);
 	text-align: center;
 }
 

@@ -12,6 +12,33 @@ var model = {
 		});
 	},
 
+  ajaxLoad : function(e){
+
+    UI.showNavBar();
+    e.preventDefault();
+    var href = this.href;
+    var splited = href.split('/');
+    splited = splited[splited.length-1];
+    console.log(splited);
+    var direction = this.getAttribute('data-direction');
+    if(splited == 'after_intro'){ // If we have the main page
+      model.importAfterIntro(function(){
+        UI.switchContent(direction);
+      });
+    }
+    else if(splited == 'the_map'){ // If we have the road map
+      model.importTheMap(function(){
+        UI.switchContent(direction);
+      });
+    }
+    else{ // classical content 
+      model.importContent(href,function(){
+        UI.switchContent(direction);
+        // Here we have to use js for the new loaded page 
+      });
+    }
+  },
+
 	importContent : function(href,callback){
 		var xmlhttp = new XMLHttpRequest();
 
@@ -19,12 +46,17 @@ var model = {
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    	{
 	    		document.getElementById("nextContent").innerHTML = xmlhttp.responseText;
-	    		callback.call(this);
+          // parser = new DOMParser();
+          // var content = parser.parseFromString(xmlhttp.responseText, "text/html");
+          // content = content.getElementsByTagName('body')[0].childNodes[0];
+          // document.getElementById("nextContent").appendChild(content);
 	    	}
     	}
   	
 		xmlhttp.open("GET",href,true);
 		xmlhttp.send();
+
+    callback.call(this);
 	},
 
 	importTheMap : function(callback){
@@ -114,18 +146,32 @@ var model = {
     container = document.createElement('div');
     container.setAttribute('id','right');
     nextContent.appendChild(container);
+    console.log(container);
 
 		var xmlhttp_left = new XMLHttpRequest();
     var xmlhttp_right = new XMLHttpRequest();
 
   		xmlhttp_left.onreadystatechange=function(){
 	  		if(xmlhttp_left.readyState==4 && xmlhttp_left.status==200){
-	    		document.getElementById('left').innerHTML = xmlhttp_left.responseText;
+          // parser = new DOMParser();
+          // var content = parser.parseFromString(xmlhttp_left.responseText, "text/html");
+          // content = content.getElementsByTagName('body')[0].childNodes[0];
+          // document.getElementById("left").appendChild(content);
+          document.getElementById("left").innerHTML = xmlhttp_left.responseText;
+
+          document.querySelector('.bg-choice a').addEventListener('click',model.ajaxLoad,false);
+
         }
     	}
       xmlhttp_right.onreadystatechange=function(){
         if(xmlhttp_right.readyState==4 && xmlhttp_right.status==200){
-          document.getElementById('right').innerHTML = xmlhttp_right.responseText;
+          // parser = new DOMParser();
+          // var content = parser.parseFromString(xmlhttp_right.responseText, "text/html");
+          // content = content.getElementsByTagName('body')[0].childNodes[0];
+          // console.log(content);
+          // document.getElementById("right").appendChild(content);
+          document.getElementById("right").innerHTML = xmlhttp_right.responseText;
+          document.querySelector('.bg-choice > a').addEventListener('click',model.ajaxLoad,false);
         }
       }
   	
@@ -136,6 +182,7 @@ var model = {
 
     var bgChoice = document.querySelectorAll('.bg-choice a');
     var choice = document.getElementById('choice');
+    console.log(bgChoice);
 
     for (var i = 0; i < bgChoice.length; i++) {
       bgChoice[i].addEventListener('mouseover',bgChoiceMouseover,false);
@@ -147,6 +194,7 @@ var model = {
     function bgChoiceMouseleave(){
       this.parentNode.classList.remove('zoom-bg');
     }
+
 		callback.call(this);
 
 	}

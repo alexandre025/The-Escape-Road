@@ -23,15 +23,26 @@ var UI = {
 		}
 
 		setTimeout(function(){
-			previous.id = 'nextContent';
+			var nextContent = document.createElement('div');
+          	nextContent.setAttribute('id','nextContent');
+          	document.body.appendChild(nextContent);
+
+			previous.remove();
 			previous.style.cssText = '';
 			previous.innerHTML = '';
 			now.id = 'activeContent';
 			now.classList.remove('initial_'+direction);
 			now.style.cssText = '';
 
+			console.log('transition');
+
 		},1500);
-
-
+	},
+	showNavBar : function(){
+		var nav = document.getElementById('menu-toggle');
+		nav.style.cssText = 'opacity:1;transition:all 1.5s';
+		setTimeout(function(){
+			nav.style.cssText='';
+		},1500);
 	}
 };
