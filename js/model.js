@@ -44,13 +44,7 @@ var model = {
 
   		xmlhttp.onreadystatechange=function(){
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	    	{
-	    		document.getElementById("nextContent").innerHTML = xmlhttp.responseText;
-          // parser = new DOMParser();
-          // var content = parser.parseFromString(xmlhttp.responseText, "text/html");
-          // content = content.getElementsByTagName('body')[0].childNodes[0];
-          // document.getElementById("nextContent").appendChild(content);
-	    	}
+	    	  { document.getElementById("nextContent").innerHTML = xmlhttp.responseText; }
     	}
   	
 		xmlhttp.open("GET",href,true);
@@ -60,54 +54,16 @@ var model = {
 	},
 
 	importTheMap : function(callback){
-        var mapStyle = 
-		[
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
-      { "lightness": -100 }
-    ]
-  },{
-    "featureType": "water",
-    "elementType": "labels",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "road",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "landscape",
-    "stylers": [
-      { "saturation": -100 }
-    ]
-  },{
-    "featureType": "landscape",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "administrative.province",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "poi",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-    "featureType": "administrative",
-    "elementType": "geometry.fill",
-    "stylers": [
-      { "visibility": "off" }
-    ]
-  },{
-  }
-		];
+        var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange=function(){
+      if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        { var mapStyle =  xmlhttp.response; }
+      }
+    xmlhttp.open("GET",'js/map_settings.json',true);
+    xmlhttp.responseType = 'json';
+    xmlhttp.send();
+
 		var mapOptions = {
           center: { lat: 17.716116, lng: 8.000741},
           zoom: 3,
@@ -153,23 +109,13 @@ var model = {
 
   		xmlhttp_left.onreadystatechange=function(){
 	  		if(xmlhttp_left.readyState==4 && xmlhttp_left.status==200){
-          // parser = new DOMParser();
-          // var content = parser.parseFromString(xmlhttp_left.responseText, "text/html");
-          // content = content.getElementsByTagName('body')[0].childNodes[0];
-          // document.getElementById("left").appendChild(content);
           document.getElementById("left").innerHTML = xmlhttp_left.responseText;
-
           document.querySelector('.bg-choice a').addEventListener('click',model.ajaxLoad,false);
 
         }
     	}
       xmlhttp_right.onreadystatechange=function(){
         if(xmlhttp_right.readyState==4 && xmlhttp_right.status==200){
-          // parser = new DOMParser();
-          // var content = parser.parseFromString(xmlhttp_right.responseText, "text/html");
-          // content = content.getElementsByTagName('body')[0].childNodes[0];
-          // console.log(content);
-          // document.getElementById("right").appendChild(content);
           document.getElementById("right").innerHTML = xmlhttp_right.responseText;
           document.querySelector('.bg-choice > a').addEventListener('click',model.ajaxLoad,false);
         }

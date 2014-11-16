@@ -37,9 +37,10 @@
       { "visibility": "off" }
     ]
   },{
-    "featureType": "landscape",
+    "featureType": "administrative",
+    "elementType": "geometry.fill",
     "stylers": [
-      { "visibility": "simplified" }
+      { "visibility": "off" }
     ]
   }
 ]
