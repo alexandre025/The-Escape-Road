@@ -38,9 +38,15 @@ var UI = {
 	},
 	showNavBar : function(){
 		var nav = document.getElementById('menu-toggle');
-		nav.style.cssText = 'opacity:1;-webkit-transition: all 1.5s linear;-moz-transition: all 1.5s linear;-ms-transition: all 1.5s linear;-o-transition: all 1.5s linear;transition: all 1.5s linear;';
+		var ioInfo = document.getElementById('io-connect');
+		var appear ='opacity:1;-webkit-transition: all 1.5s linear;-moz-transition: all 1.5s linear;-ms-transition: all 1.5s linear;-o-transition: all 1.5s linear;transition: all 1.5s linear;';
+
+		nav.style.cssText = appear;
+		ioInfo.style.cssText = appear;
+
 		setTimeout(function(){
-			nav.style.cssText='';
+			nav.style.cssText = '';
+			ioInfo.style.cssText = '';
 		},1500);
 	}
 };

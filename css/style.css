@@ -43,11 +43,11 @@ a {
 	height: 100%;
 }
 
-
-
 /* ==========================================================================
    							MENU
    ========================================================================== */
+
+
 nav {
 	position:absolute;
 	top:0px;
@@ -172,10 +172,116 @@ nav ul{
 }
 
 
+/* ==========================================================================
+   							IO
+   ========================================================================== */
 
+#io-connect {
+	display: block;
+	position: absolute;
+	height: 41px;
+	width: 120px;
+	bottom : 20px;
+	right: 20px;
+	z-index: 100;
+	border: 2px solid rgba(255, 255, 255, 0);
+	transition : all 1s ease;
 
+}
+#io-connect:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 2px solid rgba(255, 255, 255, 1);;
+	transition : all 1s ease;
+	cursor: pointer;
+}
 
+.io-img {
+	position: absolute;
+	right:3px;
+	top:3px;
+	display: block;
+	width: 35px;
+	height: 35px;
+}
+.io-channel {
+	position: absolute;
+	top: 12px;
+	left: 24px;
+	opacity: 0;
+	color: #FFFFFF;
+	transition : all 1s ease;
+}
 
+#io-info {
+	display: block;
+	position: absolute;
+	top:20px;
+	opacity: 0;
+	z-index: -999;
+	background-color: rgba(0, 0, 0, 0.8);
+	border:2px solid #FFFFFF;
+	width: 46%;
+	top:25%;
+	left:27%;	
+	height: 260px;
+	transition: all 1s ease-in-out;
+	color: #FFFFFF;
+	text-align:center;
+}
+#io-info h1 {
+	font-size: 130%;
+	margin: 30px 0px 30px 0px; 
+}
+
+#io-info .io-number {
+	display: block;
+	font-size: 200%;
+	margin: 30px 0px 0px 0px; 
+	letter-spacing: 3px;
+}
+
+.underline {
+	text-decoration: underline;
+}
+#io-icon .top{
+  -moz-transform: rotate(45deg) translate(6px, 6px);
+  -webkit-transform: rotate(45deg) translate(6px, 6px);
+  -o-transform: rotate(45deg) translate(6px, 6px);
+  -ms-transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+#io-icon .bottom {
+	margin-top: 15px;
+	-moz-transform: rotate(-45deg) translate(6px, -6px);
+	-webkit-transform: rotate(-45deg) translate(6px, -6px);
+	-o-transform: rotate(-45deg) translate(6px, -6px);
+	-ms-transition: rotate(-45deg) translate(6px, -6px);
+	transform: rotate(-45deg) translate(6px, -6px);
+}
+#io-icon {
+	padding: 10px 10px;
+	display: inline-block;
+	vertical-align: middle;
+    border: 2px solid #FFFFFF;
+    position: absolute;
+    top:-2px;
+    left:-2px;
+    height: 25px;
+}
+
+#io-icon span {
+	height: 3px;
+	width: 25px;
+	display: block;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+	background-color: #fff;
+}
+#io-icon:hover{
+	cursor: pointer;
+}
 
 
 

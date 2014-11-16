@@ -8,11 +8,14 @@ var controller = {
 		model.connect(function(IDReturn){
 
 			roomID = IDReturn;
-			console.log(roomID);
+			document.getElementsByClassName('io-channel')[0].innerHTML = roomID;
+			document.getElementsByClassName('io-number')[0].innerHTML = roomID;
+			console.log('Desktop connected to private room number : '+roomID);
 		});
 
 		controller.generateAjaxLink();
 		controller.initMenu();
+		controller.initIoInfo();
 		// Initialisation de la video
 		controller.init_video_intro();
 	},
@@ -64,7 +67,7 @@ var controller = {
 			var current_time = Math.round(self.currentTime*100/self.duration);
 
 
-			if(current_time == 5) {
+			if(current_time == 1) {
 				cache_video.classList.add('cacheVideo');
 				intro.style.display="block";
 				intro.classList.add('textIntro');
@@ -93,6 +96,29 @@ var controller = {
 		menuAll.addEventListener('click',function(){
 			menuIcon.classList.toggle('menu-on');
 			menuList.classList.toggle('menu-off');
+		},false);
+	},
+	initIoInfo : function(){
+		var ioConnect = document.getElementById('io-connect');
+		var ioChannel = document.getElementsByClassName('io-channel')[0];
+		var ioIcon = document.getElementById('io-icon');
+		ioConnect.addEventListener('mouseover',function(){
+			ioChannel.style.cssText='opacity:1;';
+		},false);
+		ioConnect.addEventListener('mouseout',function(){
+			ioChannel.style.cssText='';
+		},false);
+		ioConnect.addEventListener('click',function(evt){
+			evt.preventDefault();
+			model.toggleIoInfo(function(){
+
+			});
+		},false);
+		ioIcon.addEventListener('click',function(evt){
+			evt.preventDefault();
+			model.toggleIoInfo(function(){
+
+			});
 		},false);
 	}
 

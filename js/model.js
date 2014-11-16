@@ -56,32 +56,32 @@ var model = {
 	importTheMap : function(callback){
         var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange=function(){
-      if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        { var mapStyle =  xmlhttp.response; }
-      }
-    xmlhttp.open("GET",'js/map_settings.json',true);
-    xmlhttp.responseType = 'json';
-    xmlhttp.send();
-
 		var mapOptions = {
           center: { lat: 17.716116, lng: 8.000741},
           zoom: 3,
           minZoom:2,
           disableDefaultUI: true
-        };
-        var container = document.createElement('div');
-        container.setAttribute('id','map-canvas');
-        document.getElementById('nextContent').appendChild(container);
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-        map.setOptions({styles: mapStyle});
+    };
+    var container = document.createElement('div');
+    container.setAttribute('id','map-canvas');
+    document.getElementById('nextContent').appendChild(container);
+    var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+    // SET THE MARKERS HERE 
+    markers = new Array();
+    markers[0] = new google.maps.Marker({map:map,position: google.maps.LatLng(0,0)});
 
-        // SET THE MARKERS HERE 
-        markers = new Array();
-        markers[0] = new google.maps.Marker({map:map,position: google.maps.LatLng(0,0)});
+    xmlhttp.onreadystatechange=function(){
+      if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        { 
+          var mapStyle =  xmlhttp.response; 
+          map.setOptions({styles: mapStyle});
+        }
+      }
+    xmlhttp.open("GET",'js/map_settings.json',true);
+    xmlhttp.responseType = 'json';
+    xmlhttp.send();
 
-        callback.call(this);
+    callback.call(this);
 	},
 
 	importAfterIntro : function(callback){
@@ -143,5 +143,17 @@ var model = {
 
 		callback.call(this);
 
-	}
+	},
+  toggleIoInfo : function(callback){
+    var ioInfoBox = document.getElementById('io-info');
+    if(ioInfoBox.style.opacity == 0){
+      ioInfoBox.style.opacity='1';
+      ioInfoBox.style.zIndex='999';
+    }
+    else{
+      ioInfoBox.style.opacity='0';
+      ioInfoBox.style.zIndex='-999';      
+    }
+    callback.call(this);
+  }
 };
