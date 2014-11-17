@@ -27,6 +27,7 @@ var server = {
 				};
 			}while(!unique);
 			server.roomList.push(roomID);
+			socket.roomID = roomID;
 			socket.join(roomID+'');
 			console.log('New room ID : '+roomID);
 			socket.emit('room join',roomID); // Communicate the room ID to the desktop
@@ -48,7 +49,8 @@ var server = {
 		});
 
 		socket.on('desktop event',function(data){
-			server.io.to(roomID).emit('desktop event',data);
+			console.log(data);
+			server.io.to(socket.roomID).emit('desktop event',data);
 		});
 
 		socket.on('disconnect',function(){

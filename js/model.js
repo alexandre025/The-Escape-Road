@@ -3,11 +3,11 @@
 var model = {
 
 	connect : function(callback){
-		this.socket = io.connect('http://alexandre-ferraille.local:3000');
+		socket = io.connect('http://alexandre-ferraille.local:3000');
 
-		this.socket.emit('desktop connection');
+		socket.emit('desktop connection');
 
-		this.socket.on('room join',function(IDReturn){
+		socket.on('room join',function(IDReturn){
 			callback.call(this,IDReturn);
 		});
 	},
@@ -44,7 +44,10 @@ var model = {
 
   		xmlhttp.onreadystatechange=function(){
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	    	  { document.getElementById("nextContent").innerHTML = xmlhttp.responseText; }
+	    	  { 
+            document.getElementById("nextContent").innerHTML = xmlhttp.responseText;
+            model.docuPlayer();
+          }
     	}
   	
 		xmlhttp.open("GET",href,true);
@@ -155,5 +158,55 @@ var model = {
       ioInfoBox.style.zIndex='-999';      
     }
     callback.call(this);
+  },
+
+  docuPlayer : function(){
+    var video = document.getElementById('videoSkater');
+    var progress_bar = document.getElementById('progressBar');
+    var current_time = document.getElementById('current');
+    var total_time = document.getElementById('total');
+
+    var theLast = 0;
+    video.addEventListener('timeupdate',function(){
+      playprogress(this);
+    },false);
+    progress_bar.addEventListener('click',setVideoTime,false);
+
+
+    video.play();
+
+    function playprogress(self) {
+      var progress=self.currentTime*100/self.duration;
+      document.querySelector('.progress').style.width=progress+'%';
+
+      current_time.innerHTML = Math.round(video.currentTime);
+      total_time.innerHTML = Math.round(video.duration);
+
+      var current = Math.round(video.currentTime);
+      var data = document.querySelectorAll('#dot span'); 
+
+      for(var i = 0; i < data.length; i++) {
+        var data_time = data[i].getAttribute('data-time');
+        var dot = Math.round(data_time*100/self.duration);
+
+        data[i].classList.add('positionAction');
+        data[i].style.left=dot+'%';
+
+        if(data_time == current && theLast != dot) { // 
+
+          console.log(dot+' '+theLast);
+          theLast = dot;
+          socket.emit('desktop event',data[i].innerHTML);
+          // 
+        }
+      }
+    }
+
+    function setVideoTime(e) {
+      e.stopPropagation();
+      video.play();
+      video.currentTime=e.offsetX*video.duration/this.offsetWidth;
+    }
+
   }
 };

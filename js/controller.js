@@ -4,7 +4,6 @@ var controller = {
 
 	init : function(){
 	
-		var roomID;
 		model.connect(function(IDReturn){
 
 			roomID = IDReturn;
@@ -124,4 +123,5 @@ var controller = {
 
 
 };
+var socket,roomID;
 controller.init();
