@@ -39,7 +39,7 @@
 
 .choice:hover {
 	/*letter-spacing: .5px;*/
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .choice-name {

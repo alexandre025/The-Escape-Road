@@ -12,6 +12,7 @@ var controller = {
 			console.log('Desktop connected to private room number : '+roomID);
 		});
 
+		model.initLocalStorage();
 		controller.generateAjaxLink();
 		controller.initMenu();
 		controller.initIoInfo();
@@ -70,14 +71,18 @@ var controller = {
 				cache_video.classList.add('cacheVideo');
 				intro.style.display="block";
 				intro.classList.add('textIntro');
+				video_intro.removeEventListener('timeupdate',progress,false);
 			}	
 			
 		}
 
 		function restart(){
 			video_intro.play();
-			video_intro.muted = true;
-			mute.classList.add('off');
+			if(video_intro.muted == false){
+				video_intro.muted = true;
+				mute.classList.remove('on');
+				mute.classList.add('off');
+			}
 		}
 	},
 	initMenu : function(){ // Non MVC

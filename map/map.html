@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>The Escape Road</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="icon" type="image/png" href="favicon5.ico" />
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/normalize.css">
+	</head>
+	<body>
+
+
+		<!-- MAP -->
+		<div id='nextContent'>
+			<div id="map-canvas">
+				<div id="infobox"></div>
+			</div>
+			<div class="map-legend">
+				<div><img src="img/marker_grey.png"><span>To discover</span></div>
+				<div><img src="img/marker_red.png"><span>Already seen</span></div>
+			</div>
+		</div>
+
+
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script type="text/javascript" src="js/model.js"></script>
+		<script type="text/javascript" src="js/UI.js"></script>
+		<script type="text/javascript" src="js/controller.js"></script>
+		<script type="text/javascript" src="js/map.js"></script>
+	</body>
+</html>
+
+

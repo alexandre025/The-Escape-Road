@@ -7,6 +7,20 @@
 	<link rel="icon" type="image/ico" href="img/favicon.ico" />
 </head>
 <body>
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<script type="text/javascript">
+		window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+	</script>
 
 	<nav style="opacity:0;" id='menu-toggle'>
 		<div id='menu-all'>
@@ -20,6 +34,8 @@
 			<ul class="menu-items menu-off">
 				<li><a href='after_intro' data-direction='bottom' class='nextContent'>Random History</a></li>
 				<li><a href='the_map' data-direction='bottom' class='nextContent'>The RoadMap</a></li>
+				<li style="position:absolute;right:120px;"><div class="fb-share-button" data-href="https://escaperoad.net" data-layout="button_count"></div></li>
+				<li style="position:absolute;right:-15px;"><a class="twitter-share-button" href="https://twitter.com/share">Tweet</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -49,17 +65,17 @@
 		<div id="cacheVideo"></div>
 		
 		<video id="video_intro">
-			<source src="video/video_intro.webm" type="video/webm">
-			<source src="video/video_intro.ogg" type="video/ogg">
-			<source src="video/video_intro.m4v" type="video/m4v">
+			<source src="video/intro.webm" type="video/webm">
+			<source src="video/intro.ogg" type="video/ogg">
+			<source src="video/intro.mp4" type="video/mp4">
 		</video>
 
 
 		<div id="textIntro">
 				<img src="img/logo_v1.png" alt="logo">
 
-				<p>Le skateboard est un état d’esprit, une façon de vivre.
-				Pour ses pratiquants, le skateboard est une façon de s’evader, de se sentir libre. Voici leurs témoignages, voici leurs routes echapatoires. Leur manière à eux de ce libérer du quotidien.
+				<p>Skateboarding is a state of mind, a life style. For its practitioners, skateboarding is a way of everyday evader: feel free.
+Here are their stories, their histories, and their escape road.
 				</p>
 				<div id="buttonStart">
 					<a href="after_intro" class='nextContent' data-direction='top'>Start Experience</a>

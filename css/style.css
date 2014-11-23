@@ -36,7 +36,7 @@ a {
 }
 
 
-#map-canvas {
+#allNodes {
 	postition: absolute;
 	width: 100%;
 	height: 100%;
@@ -49,8 +49,8 @@ a {
 
 nav {
 	position:absolute;
-	top:0px;
-	left:0px;
+	top:-10px;
+	left:-10px;
 	z-index:15;
 	display: block;
 	/*opacity: 0;*/
@@ -151,23 +151,28 @@ nav ul{
 	transition: all 1s ease;
 	opacity:1;
 	background-color: rgba(0,0,0,0.6);
-	text-align: center;
 }
 
 .menu-off {
 	position: absolute;
-	left:-300px;
+	left:-700px;
 	opacity: 0;
 }
 
 .cache-menu {
 	display: inline-block;
 	overflow: hidden;
-	width: 300px;
+	width: 490px;
 	height: 44px;
 	position: absolute;
 	left: 79px;
 	top: 30px;
+}
+
+.fb_iframe_widget {
+	display: inline-block;
+	line-height: 13px;
+	position: relative;
 }
 
 
@@ -184,13 +189,21 @@ nav ul{
 	right: 20px;
 	z-index: 100;
 	border: 2px solid rgba(255, 255, 255, 0);
-	transition : all 1s ease;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 
 }
 #io-connect:hover {
 	background-color: rgba(0, 0, 0, 0.6);
 	border: 2px solid rgba(255, 255, 255, 1);;
-	transition : all 1s ease;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;	
 	cursor: pointer;
 }
 
@@ -208,21 +221,28 @@ nav ul{
 	left: 24px;
 	opacity: 0;
 	color: #FFFFFF;
-	transition : all 1s ease;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 }
 
 #io-info {
 	display: block;
 	position: absolute;
-	top:20px;
 	opacity: 0;
 	z-index: -999;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.6);
 	border:2px solid #FFFFFF;
 	width: 46%;
 	top:25%;
 	left:27%;	
 	height: 260px;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
 	transition: all 1s ease-in-out;
 	color: #FFFFFF;
 	text-align:center;

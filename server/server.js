@@ -35,15 +35,17 @@ var server = {
 
 		socket.on('mobile connection',function(roomID){
 			console.log('Try to connect a mobile to : '+roomID);
-			for (var i = 0; i < server.roomList.length; i++) {
+			var idOK = false;
+			for (var i = 0; i < server.roomList.length && idOK == false; i++) {
 				if(server.roomList[i] == roomID){
 					socket.join(roomID+'');
 					socket.emit('room join');
-					console.log('... SUCCESFULL !!')
+					idOK = true;
+					console.log('... SUCCESFULL !!');
 				}
 				else{
 					socket.emit('wrong roomID');
-					console.log('... ERROR !!')
+					console.log('... ERROR !!');
 				}
 			};
 		});

@@ -4,14 +4,17 @@
 	<meta charset="utf-8">
 	<title>The Escape Road</title>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" type="image/ico" href="../img/favicon.ico" />
 </head>
 <body>
+	<img class="logo" src="../img/logo_v1.png">
 	<form id='connection' action=''>
-		<input id='roomID' type='number' required>
+		<input id='roomID' type='number' maxlength="4" required>
 		<input type='submit'>
-		<span id='roomInfo'></span>
 	</form>	
+	<div id="content">
 
+	</div>
 
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script type="text/javascript" src="js/model.js"></script>

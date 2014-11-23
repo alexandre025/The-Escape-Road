@@ -16,6 +16,11 @@ var model = {
 
     UI.showNavBar();
     e.preventDefault();
+
+    var video = document.querySelector('video');
+    if(video){ 
+      video.pause(); 
+    }
     var href = this.href;
     var splited = href.split('/');
     splited = splited[splited.length-1];
@@ -33,8 +38,8 @@ var model = {
     }
     else{ // classical content 
       model.importContent(href,function(){
+        model.setViewed(href);
         UI.switchContent(direction);
-        // Here we have to use js for the new loaded page 
       });
     }
   },
@@ -42,10 +47,13 @@ var model = {
 	importContent : function(href,callback){
 		var xmlhttp = new XMLHttpRequest();
 
+    var container = document.createElement('div');
+    container.setAttribute('id','allNodes');
+    document.getElementById('nextContent').appendChild(container);
   		xmlhttp.onreadystatechange=function(){
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    	  { 
-            document.getElementById("nextContent").innerHTML = xmlhttp.responseText;
+            document.getElementById("allNodes").innerHTML = xmlhttp.responseText;
             model.docuPlayer();
           }
     	}
@@ -57,21 +65,38 @@ var model = {
 	},
 
 	importTheMap : function(callback){
-        var xmlhttp = new XMLHttpRequest();
+    var xmlhttp = new XMLHttpRequest();
 
 		var mapOptions = {
-          center: { lat: 17.716116, lng: 8.000741},
-          zoom: 3,
-          minZoom:2,
-          disableDefaultUI: true
+      zoom: 3,
+      zoomControl: false,
+      maxZoom : 4,
+      minZoom : 2,
+      mapTypeControl: false,
+      streetViewControl : false,
+      panControl: false,
+      center: new google.maps.LatLng(24.071876, 15.441456)
     };
     var container = document.createElement('div');
-    container.setAttribute('id','map-canvas');
+    var legend = document.createElement('div');
+    legend.classList.add('map-legend');
+    legend.innerHTML = '<div><img src="img/marker_grey.png"><span>To discover</span></div><div><img src="img/marker_red.png"><span>Already seen</span></div>';
+
+    container.setAttribute('id','allNodes');
     document.getElementById('nextContent').appendChild(container);
-    var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-    // SET THE MARKERS HERE 
-    markers = new Array();
-    markers[0] = new google.maps.Marker({map:map,position: google.maps.LatLng(0,0)});
+    var map = new google.maps.Map(container,mapOptions);
+    container.appendChild(legend);
+
+    UI.setMarkers(map,function(marker,href){
+      console.log(marker);
+      console.log(href);
+      google.maps.event.addListener(marker, 'click', function() {
+           model.importContent(href,function(){
+              model.setViewed(href);
+              UI.switchContent('bottom');
+           });
+      });
+    });
 
     xmlhttp.onreadystatechange=function(){
       if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -79,7 +104,7 @@ var model = {
           var mapStyle =  xmlhttp.response; 
           map.setOptions({styles: mapStyle});
         }
-      }
+    }
     xmlhttp.open("GET",'js/map_settings.json',true);
     xmlhttp.responseType = 'json';
     xmlhttp.send();
@@ -90,22 +115,25 @@ var model = {
 	importAfterIntro : function(callback){
 		// Generate two random number
 
-		var left  = Math.round((Math.random()*7)+1),
+		var left  = Math.round((Math.random()*3)+1),
 			right;
 		do{
-			right = Math.round((Math.random()*7)+1);
+			right = Math.round((Math.random()*3)+1);
 		}while(left == right); 
     console.log(left+' '+right);
 
     var nextContent = document.getElementById('nextContent');
-    console.log(nextContent);
+    var div = document.createElement('div');
+    div.setAttribute('id','allNodes');
+    nextContent.appendChild(div);
+
     var container = document.createElement('div');
     container.setAttribute('id','left');
-    nextContent.appendChild(container);
+    div.appendChild(container);
+
     container = document.createElement('div');
     container.setAttribute('id','right');
-    nextContent.appendChild(container);
-    console.log(container);
+    div.appendChild(container);
 
 		var xmlhttp_left = new XMLHttpRequest();
     var xmlhttp_right = new XMLHttpRequest();
@@ -113,37 +141,37 @@ var model = {
   		xmlhttp_left.onreadystatechange=function(){
 	  		if(xmlhttp_left.readyState==4 && xmlhttp_left.status==200){
           document.getElementById("left").innerHTML = xmlhttp_left.responseText;
-          document.querySelector('.bg-choice a').addEventListener('click',model.ajaxLoad,false);
-
+          allEvent();
         }
     	}
       xmlhttp_right.onreadystatechange=function(){
         if(xmlhttp_right.readyState==4 && xmlhttp_right.status==200){
           document.getElementById("right").innerHTML = xmlhttp_right.responseText;
-          document.querySelector('.bg-choice > a').addEventListener('click',model.ajaxLoad,false);
+          allEvent();
         }
       }
   	
-		xmlhttp_left.open("GET",'inc/left/left_sk_1.html',true);
+		xmlhttp_left.open("GET",'inc/left/sk_'+left+'.html',true);
 		xmlhttp_left.send();
-		xmlhttp_right.open("GET",'inc/right/right_sk_1.html',true);
+		xmlhttp_right.open("GET",'inc/right/sk_'+right+'.html',true);
 		xmlhttp_right.send();
 
-    var bgChoice = document.querySelectorAll('.bg-choice a');
-    var choice = document.getElementById('choice');
-    console.log(bgChoice);
+    function allEvent(){
+      var bgChoice = document.querySelectorAll('.bg-choice a');
+      var choice = document.getElementById('choice');
 
-    for (var i = 0; i < bgChoice.length; i++) {
-      bgChoice[i].addEventListener('mouseover',bgChoiceMouseover,false);
-      bgChoice[i].addEventListener('mouseleave',bgChoiceMouseleave,false);
-    };
-    function bgChoiceMouseover(){
-      this.parentNode.classList.add('zoom-bg');
+      for (var i = 0; i < bgChoice.length; i++) {
+        bgChoice[i].addEventListener('mouseover',bgChoiceMouseover,false);
+        bgChoice[i].addEventListener('mouseleave',bgChoiceMouseleave,false);
+        bgChoice[i].addEventListener('click',model.ajaxLoad,false);
+      };
+      function bgChoiceMouseover(){
+        this.parentNode.classList.add('zoom-bg');
+      }
+      function bgChoiceMouseleave(){
+        this.parentNode.classList.remove('zoom-bg');
+      }
     }
-    function bgChoiceMouseleave(){
-      this.parentNode.classList.remove('zoom-bg');
-    }
-
 		callback.call(this);
 
 	},
@@ -165,6 +193,12 @@ var model = {
     var progress_bar = document.getElementById('progressBar');
     var current_time = document.getElementById('current');
     var total_time = document.getElementById('total');
+    var play = document.getElementById('playPause');
+    var playerMute = document.getElementById('playerOnOff');
+
+
+    playerMute.addEventListener('click',playerMuted,false);
+    play.addEventListener('click',playPause,false);
 
     var theLast = 0;
     video.addEventListener('timeupdate',function(){
@@ -172,10 +206,13 @@ var model = {
     },false);
     progress_bar.addEventListener('click',setVideoTime,false);
 
+    video.addEventListener('ended',UI.afterVideo,false);
+
 
     video.play();
 
     function playprogress(self) {
+      UI.replayVideo();
       var progress=self.currentTime*100/self.duration;
       document.querySelector('.progress').style.width=progress+'%';
 
@@ -208,5 +245,47 @@ var model = {
       video.currentTime=e.offsetX*video.duration/this.offsetWidth;
     }
 
+    function playPause() {
+      if(video.paused) {
+        video.play();
+        play.classList.add('play');
+        play.classList.remove('pause');
+      }
+      else {
+        video.pause();
+        play.classList.add('pause');
+        play.classList.remove('play');
+      }
+    }
+
+    function playerMuted() {
+      if(video.muted == false) {
+        video.muted = true;
+        playerMute.classList.remove('playerOn');
+        playerMute.classList.add('playerOff');
+      }
+
+      else {
+        video.muted = false;
+        playerMute.classList.add('playerOn');
+        playerMute.classList.remove('playerOff');
+      }
+    }
+
+  },
+  initLocalStorage : function(){
+    for (var i = 1; i < 9; i++) {
+      if(!localStorage.getItem(i)){
+        localStorage.setItem(i,"no");
+      }
+    };
+  },
+  setViewed : function(href){
+    var splited = href.split('sk_');
+    splited = splited[1];
+    console.log(splited);
+    splited = splited.split('.');
+    splited = splited[0];
+    localStorage.setItem(splited,'yes');
   }
 };

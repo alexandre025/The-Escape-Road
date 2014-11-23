@@ -48,6 +48,7 @@
 }
 
 
+
 #timeProgress {
 	position: absolute;
 	right: 50px;
@@ -55,7 +56,92 @@
 	color: white;
 }
 
+#action {
+	width: 68px;
+	height: 30px;
+}
 
 
+#playPause {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 5px;
+	left: 30px;	
+}
+
+.play {
+	background: url(../img/play.png) no-repeat;
+}
+
+.pause {
+	background: url(../img/pause.png) no-repeat;
+}
+
+#playerOnOff {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 80px;
+	top: 5px;
+}
+
+.playerOn {
+	background: url(../img/playerOn.png) no-repeat;
+}
+
+.playerOff {
+	background: url(../img/playerOff.png) no-repeat;
+}
 
 
+#after_video {
+	display: block;
+	position: absolute;
+	opacity: 0;
+	z-index: -999;
+	background-color: rgba(0, 0, 0, 0.6);
+	border:2px solid #FFFFFF;
+	width: 60%;
+	top:100px;
+	left:20%;	
+	height: 300px;
+	transition: all 1s ease-in-out;
+	color: #FFFFFF;
+	text-align:center;
+	overflow:hidden;
+}
+
+#after_video p{
+	padding: 20px 20px 50px 20px;
+	display: block;
+	height: 230px;
+	overflow-y:scroll;
+}
+
+#after_video ul {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 48px;
+	border-top:2px solid white;
+
+}
+#after_video ul li {
+	display: inline-block;
+	z-index: 5;
+	width: 32%;
+	height: 100%;
+	border-right: 2px solid white;
+	line-height: 45px;
+	font-size: 18px;
+}
+#after_video ul li:last-child{
+	border-right: none;
+}
+#cache_scroll{
+	overflow: hidden;
+	height: 250px;
+}
