@@ -6,7 +6,7 @@ body, html {
 	background-image: url('../img/back.jpg');
 	z-index: 1;
 	-webkit-font-smoothing: antialiased;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
 }
 
 #nextContent {
@@ -64,7 +64,7 @@ nav {
 	text-transform: uppercase;
 	display: inline-block;
 	color : white;
-	font-family: 'Yanone Kaffeesatz';
+	font-family: 'Roboto Condensed';
 	text-align: center;
 }
 
@@ -162,7 +162,7 @@ nav ul{
 .cache-menu {
 	display: inline-block;
 	overflow: hidden;
-	width: 490px;
+	width: 565px;
 	height: 44px;
 	position: absolute;
 	left: 79px;

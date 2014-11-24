@@ -43,11 +43,11 @@ var server = {
 					idOK = true;
 					console.log('... SUCCESFULL !!');
 				}
-				else{
-					socket.emit('wrong roomID');
-					console.log('... ERROR !!');
-				}
 			};
+			if(idOK=false){
+				socket.emit('wrong roomID');
+				console.log('... ERROR !!');
+			}
 		});
 
 		socket.on('desktop event',function(data){

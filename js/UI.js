@@ -28,7 +28,7 @@ var UI = {
           	nextContent.setAttribute('id','nextContent');
           	document.body.appendChild(nextContent);
 
-          	previous.remove(); // Supr l'ancien activeContent
+          	previous.parentNode.removeChild(previous); // Supr l'ancien activeContent
 	      	
 			
 			var activeContent = document.createElement('div'); // Créa du nouvel activeContent
@@ -41,7 +41,7 @@ var UI = {
 
 
 		 	
-			 now.remove();
+			now.parentNode.removeChild(now);
 
 		    var video = document.querySelector('video');
     		if(video){ 
@@ -82,14 +82,14 @@ var UI = {
 	setMarkers : function(map,callback){
 
 		var locations = [
-		  ['inc/sk_1.html','<div class="marker-content"><strong>MegabiSkate</strong><span>Skateboarding in Addis Abeba, Ethiopie</span><em>View again</em></div>', 8.9806034, 38.7577605, 1],
-		  ['inc/sk_2.html','<div class="marker-content"><strong>This Ain\'t California</strong><span>Skateboarding in East Berlin (GDR), Germany</span><em>View again</em></div>', 52.5200066, 13.4049540, 2],
-		  ['inc/sk_3.html','<div class="marker-content"><strong>Skateboarding in India</strong><span>Skateboarding in Bangalore, India</span><em>View again</em></div>', 12.9715987, 77.5945627, 3],
-		  ['inc/sk_4.html','<div class="marker-content"><strong>The Modern Skate</strong><span>Skateboarding in Dordogne, France</span><em>View again</em></div>', 45.1493094, 0.7606537, 4],
-		  ['inc/sk_5.html','<div class="marker-content"><strong>Skateistan</strong><span>Skateboarding in Kabul, Afghanistan</span><em>View again</em></div>', 34.5333330, 69.1666670, 5],
-		  ['inc/sk_6.html','<div class="marker-content"><strong>I’am a Thalente</strong><span>Skateboarding in Durban, South Africa</span><em>View again</em></div>', -29.8714083, 31.0304235, 6],
-		  ['inc/sk_7.html','<div class="marker-content"><strong>Youth of Yangon</strong><span>Skateboarding in Yangon, Burma</span><em>View again</em></div>', 16.7808330, 96.1497220, 7],
-		  ['inc/sk_8.html','<div class="marker-content"><strong>Cuba Skate</strong><span>Skateboarding in Havana, Cuba</span><em>View again</em></div>', 23.0511477, -82.3367776, 8]
+		  ['inc/sk_1.html','<div class="marker-content"><strong>MegabiSkate</strong><span>Skateboarding in Addis Abeba, Ethiopie</span></div>', 8.9806034, 38.7577605, 1],
+		  ['inc/sk_2.html','<div class="marker-content"><strong>This Ain\'t California</strong><span>Skateboarding in East Berlin (GDR), Germany</span></div>', 52.5200066, 13.4049540, 2],
+		  ['inc/sk_3.html','<div class="marker-content"><strong>Skateboarding in India</strong><span>Skateboarding in Bangalore, India</span></div>', 12.9715987, 77.5945627, 3],
+		  ['inc/sk_4.html','<div class="marker-content"><strong>The Modern Skate</strong><span>Skateboarding in Dordogne, France</span></div>', 45.1493094, 0.7606537, 4],
+		  ['inc/sk_5.html','<div class="marker-content"><strong>Skateistan</strong><span>Skateboarding in Kabul, Afghanistan</span></div>', 34.5333330, 69.1666670, 5],
+		  ['inc/sk_6.html','<div class="marker-content"><strong>I’am a Thalente</strong><span>Skateboarding in Durban, South Africa</span></div>', -29.8714083, 31.0304235, 6],
+		  ['inc/sk_7.html','<div class="marker-content"><strong>Youth of Yangon</strong><span>Skateboarding in Yangon, Burma</span></div>', 16.7808330, 96.1497220, 7],
+		  ['inc/sk_8.html','<div class="marker-content"><strong>Cuba Skate</strong><span>Skateboarding in Havana, Cuba</span></div>', 23.0511477, -82.3367776, 8]
 		];
 
 		var logoImage = {

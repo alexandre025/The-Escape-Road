@@ -36,6 +36,11 @@ var model = {
         UI.switchContent(direction);
       });
     }
+    else if(splited == 'support'){
+      model.importSupport(function(){
+        UI.switchContent(direction);
+      });
+    }
     else{ // classical content 
       model.importContent(href,function(){
         model.setViewed(href);
@@ -43,7 +48,25 @@ var model = {
       });
     }
   },
+  importSupport : function(callback){
+    var xmlhttp = new XMLHttpRequest();
 
+    var container = document.createElement('div');
+    container.setAttribute('id','allNodes');
+    document.getElementById('nextContent').appendChild(container);
+      xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+          { 
+            document.getElementById("allNodes").innerHTML = xmlhttp.responseText;
+          }
+      }
+    
+    xmlhttp.open("GET",'inc/support.html',true);
+    xmlhttp.send();
+
+    callback.call(this);
+
+  },
 	importContent : function(href,callback){
 		var xmlhttp = new XMLHttpRequest();
 
@@ -55,6 +78,10 @@ var model = {
 	    	  { 
             document.getElementById("allNodes").innerHTML = xmlhttp.responseText;
             model.docuPlayer();
+            var nextPrev = document.querySelectorAll('#after_video a.nextContent');
+            for (var i = 0; i < nextPrev.length; i++) {
+              nextPrev[i].addEventListener('click',model.ajaxLoad,false);
+            };
           }
     	}
   	
@@ -242,7 +269,7 @@ var model = {
     function setVideoTime(e) {
       e.stopPropagation();
       video.play();
-      video.currentTime=e.offsetX*video.duration/this.offsetWidth;
+      video.currentTime=(e.offsetX*video.duration/this.offsetWidth).toPrecision(3);
     }
 
     function playPause() {

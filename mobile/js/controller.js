@@ -3,9 +3,8 @@
 var controller = {
 
 	init : function(){
-
 		model.connect();
-
+		
 		var form = document.getElementById('connection');
 		form.addEventListener('submit',function(e){
 			e.preventDefault();
@@ -20,9 +19,7 @@ var controller = {
 					UI.connectionOk();
 					controller.startEvents();
 				}
-
 			});
-
 		},false);
 	},
 

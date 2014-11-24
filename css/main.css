@@ -1,4 +1,5 @@
 @import 'reset.css';
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700);
 @import 'style.css';
 @import 'intro.css';
 @import 'choice.css';
