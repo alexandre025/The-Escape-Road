@@ -43,8 +43,9 @@ var server = {
 					idOK = true;
 					console.log('... SUCCESFULL !!');
 				}
+				console.log('error');
 			};
-			if(idOK=false){
+			if(idOK==false){
 				socket.emit('wrong roomID');
 				console.log('... ERROR !!');
 			}
