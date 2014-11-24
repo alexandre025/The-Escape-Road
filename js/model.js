@@ -222,7 +222,13 @@ var model = {
     var total_time = document.getElementById('total');
     var play = document.getElementById('playPause');
     var playerMute = document.getElementById('playerOnOff');
+    var playerReplay = document.querySelector('.playerReplay');
 
+    playerReplay.addEventListener('click',function(event){
+      event.preventDefault();
+      video.play();
+      UI.replayVideo();
+    },false);
 
     playerMute.addEventListener('click',playerMuted,false);
     play.addEventListener('click',playPause,false);

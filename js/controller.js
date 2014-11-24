@@ -78,11 +78,6 @@ var controller = {
 
 		function restart(){
 			video_intro.play();
-			if(video_intro.muted == false){
-				video_intro.muted = true;
-				mute.classList.remove('on');
-				mute.classList.add('off');
-			}
 		}
 	},
 	initMenu : function(){ // Non MVC
