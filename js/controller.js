@@ -7,8 +7,7 @@ var controller = {
 		model.connect(function(IDReturn){
 
 			roomID = IDReturn;
-			document.getElementsByClassName('io-channel')[0].innerHTML = roomID;
-			document.getElementsByClassName('io-number')[0].innerHTML = roomID;
+			UI.setRoomID();
 			console.log('Desktop connected to private room number : '+roomID);
 		});
 
@@ -97,7 +96,7 @@ var controller = {
 			menuList.classList.toggle('menu-off');
 		},false);
 	},
-	initIoInfo : function(){
+	initIoInfo : function(){ // Non MVC
 		var ioConnect = document.getElementById('io-connect');
 		var ioChannel = document.getElementsByClassName('io-channel')[0];
 		var ioIcon = document.getElementById('io-icon');
@@ -109,19 +108,15 @@ var controller = {
 		},false);
 		ioConnect.addEventListener('click',function(evt){
 			evt.preventDefault();
-			model.toggleIoInfo(function(){
-
-			});
+			UI.toggleIoInfo();
 		},false);
 		ioIcon.addEventListener('click',function(evt){
 			evt.preventDefault();
-			model.toggleIoInfo(function(){
-
-			});
+			UI.toggleIoInfo();
 		},false);
 	}
 
 
 };
-var socket,roomID;
+var socket,roomID, firstTime = true;
 controller.init();

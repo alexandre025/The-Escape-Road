@@ -145,3 +145,29 @@
 	overflow: hidden;
 	height: 250px;
 }
+
+@keyframes bounce {
+	0% { top:3px; }
+	25% { top:-7px; }
+	50% { top:3px; }
+	75% { top:-7px; }
+	100% { top:3px;}
+}
+
+.bounce {
+	animation:bounce 1s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

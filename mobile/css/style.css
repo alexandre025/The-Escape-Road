@@ -105,11 +105,11 @@ input[type="submit"]{
 }
 
 #content {
-	width: 95%;
-	margin: 0 auto;
-	padding-top: 15px;
+	margin-top: 15px;
+	padding: 25px;
 	font-size: 120%;
 	color: white;
+	background-color: rgba(0,0,0,0.6);
 }
 
 

@@ -29,6 +29,12 @@ var model = {
     if(splited == 'after_intro'){ // If we have the main page
       model.importAfterIntro(function(){
         UI.switchContent(direction);
+        if(firstTime){
+          setTimeout(function(){
+            UI.toggleIoInfo();
+          },1000);
+          firstTime=false;
+        }
       });
     }
     else if(splited == 'the_map'){ // If we have the road map
@@ -202,18 +208,6 @@ var model = {
 		callback.call(this);
 
 	},
-  toggleIoInfo : function(callback){
-    var ioInfoBox = document.getElementById('io-info');
-    if(ioInfoBox.style.opacity == 0){
-      ioInfoBox.style.opacity='1';
-      ioInfoBox.style.zIndex='999';
-    }
-    else{
-      ioInfoBox.style.opacity='0';
-      ioInfoBox.style.zIndex='-999';      
-    }
-    callback.call(this);
-  },
 
   docuPlayer : function(){
     var video = document.getElementById('videoSkater');
@@ -241,7 +235,6 @@ var model = {
 
     video.addEventListener('ended',UI.afterVideo,false);
 
-
     video.play();
 
     function playprogress(self) {
@@ -249,8 +242,15 @@ var model = {
       var progress=self.currentTime*100/self.duration;
       document.querySelector('.progress').style.width=progress+'%';
 
-      current_time.innerHTML = Math.round(video.currentTime);
-      total_time.innerHTML = Math.round(video.duration);
+      var minutes = Math.floor(video.duration/60);
+      var sec = Math.round(video.duration - (minutes * 60));
+      if(sec<10){sec = '0'+sec;}
+      total_time.innerHTML = minutes+':'+sec;
+
+      minutes = Math.floor(video.currentTime/60);
+      sec = Math.round(video.currentTime - (minutes * 60));
+      if(sec<10){sec = '0'+sec;}
+      current_time.innerHTML = minutes+':'+sec;
 
       var current = Math.round(video.currentTime);
       var data = document.querySelectorAll('#dot span'); 
@@ -267,6 +267,7 @@ var model = {
           console.log(dot+' '+theLast);
           theLast = dot;
           socket.emit('desktop event',data[i].innerHTML);
+          UI.bounce();
           // 
         }
       }
