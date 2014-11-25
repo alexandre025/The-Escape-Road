@@ -118,5 +118,7 @@ var controller = {
 
 
 };
-var socket,roomID, firstTime = true;
-controller.init();
+window.addEventListener('load',function(){
+	var socket,roomID, firstTime = true;
+	controller.init();
+},false);

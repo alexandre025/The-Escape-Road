@@ -1,6 +1,9 @@
 'use.strict';
 
 var UI = {
+	endLoader : function(){
+		
+	},
 	setRoomID : function(){
 		document.getElementsByClassName('io-channel')[0].innerHTML = roomID;
 		document.getElementsByClassName('io-number')[0].innerHTML = roomID;
