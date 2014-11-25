@@ -3,7 +3,9 @@
 var controller = {
 
 	init : function(){
-	
+
+		UI.endLoader();
+		
 		model.connect(function(IDReturn){
 
 			roomID = IDReturn;
