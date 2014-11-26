@@ -10,6 +10,7 @@ var model = {
 		socket.on('room join',function(IDReturn){
 			callback.call(this,IDReturn);
 		});
+
 	},
 
   ajaxLoad : function(e){
@@ -100,7 +101,7 @@ var model = {
 	importTheMap : function(callback){
     var xmlhttp = new XMLHttpRequest();
 
-		var mapOptions = {
+		var mapOptions = { // Set des maps 
       zoom: 3,
       zoomControl: false,
       maxZoom : 4,
@@ -146,16 +147,16 @@ var model = {
 	},
 
 	importAfterIntro : function(callback){
-		// Generate two random number
-
-		var left  = Math.round((Math.random()*3)+1),
+		
+    // Generation de deux random number
+		var left  = Math.round((Math.random()*3)+1), 
 			right;
 		do{
 			right = Math.round((Math.random()*3)+1);
 		}while(left == right); 
     console.log(left+' '+right);
 
-    var nextContent = document.getElementById('nextContent');
+    var nextContent = document.getElementById('nextContent'); // Selection et création des nouveaux conteneurs
     var div = document.createElement('div');
     div.setAttribute('id','allNodes');
     nextContent.appendChild(div);
@@ -171,10 +172,10 @@ var model = {
 		var xmlhttp_left = new XMLHttpRequest();
     var xmlhttp_right = new XMLHttpRequest();
 
-  		xmlhttp_left.onreadystatechange=function(){
+  		xmlhttp_left.onreadystatechange=function(){ 
 	  		if(xmlhttp_left.readyState==4 && xmlhttp_left.status==200){
           document.getElementById("left").innerHTML = xmlhttp_left.responseText;
-          allEvent();
+          allEvent(); 
         }
     	}
       xmlhttp_right.onreadystatechange=function(){
@@ -184,25 +185,26 @@ var model = {
         }
       }
   	
+    //Double appel ajax pour les deux skateurs
 		xmlhttp_left.open("GET",'inc/left/sk_'+left+'.html',true);
 		xmlhttp_left.send();
 		xmlhttp_right.open("GET",'inc/right/sk_'+right+'.html',true);
 		xmlhttp_right.send();
 
-    function allEvent(){
-      var bgChoice = document.querySelectorAll('.bg-choice a');
-      var choice = document.getElementById('choice');
+    function allEvent(){ // Ajout des événements sur les nouveau élements 
+      var a = document.querySelectorAll('.bg-choice a');
+      var choice = document.querySelectorAll('.bg-choice');
 
-      for (var i = 0; i < bgChoice.length; i++) {
-        bgChoice[i].addEventListener('mouseover',bgChoiceMouseover,false);
-        bgChoice[i].addEventListener('mouseleave',bgChoiceMouseleave,false);
-        bgChoice[i].addEventListener('click',model.ajaxLoad,false);
+      for (var i = 0; i < choice.length; i++) {
+        choice[i].addEventListener('mouseover',bgChoiceMouseover,false);
+        choice[i].addEventListener('mouseleave',bgChoiceMouseleave,false);
+        a[i].addEventListener('click',model.ajaxLoad,false);
       };
       function bgChoiceMouseover(){
-        this.parentNode.classList.add('zoom-bg');
+        this.classList.add('zoom-bg');
       }
       function bgChoiceMouseleave(){
-        this.parentNode.classList.remove('zoom-bg');
+        this.classList.remove('zoom-bg');
       }
     }
 		callback.call(this);
@@ -224,9 +226,11 @@ var model = {
       UI.replayVideo();
     },false);
 
+    // On écoute l'évènement de playPause et de Mute.
     playerMute.addEventListener('click',playerMuted,false);
     play.addEventListener('click',playPause,false);
 
+    // On initialise theLast à 0.
     var theLast = 0;
     video.addEventListener('timeupdate',function(){
       playprogress(this);
@@ -239,9 +243,12 @@ var model = {
 
     function playprogress(self) {
       UI.replayVideo();
+
+      // Evolution de la progress bar.
       var progress=self.currentTime*100/self.duration;
       document.querySelector('.progress').style.width=progress+'%';
 
+      // Transformation du format secondes en minutes : secondes
       var minutes = Math.floor(video.duration/60);
       var sec = Math.round(video.duration - (minutes * 60));
       if(sec<10){sec = '0'+sec;}
@@ -252,23 +259,35 @@ var model = {
       if(sec<10){sec = '0'+sec;}
       current_time.innerHTML = minutes+':'+sec;
 
+      // Arrondi du moment X de la vidéo
       var current = Math.round(video.currentTime);
+
+      // récupération des span contenant le data-time, visible dans la progress bar.
       var data = document.querySelectorAll('#dot span'); 
 
+      // Parcours de toute les span
       for(var i = 0; i < data.length; i++) {
+        // Récupération de l'attribut data-time.
         var data_time = data[i].getAttribute('data-time');
-        var dot = Math.round(data_time*100/self.duration);
 
+        // Ajout et placement des losanges en fonction du data-time indiqué.
+        var dot = Math.round(data_time*100/self.duration);
         data[i].classList.add('positionAction');
         data[i].style.left=dot+'%';
 
-        if(data_time == current && theLast != dot) { // 
+        // Stop la propagation pour empêcher de revenir au début de la vidéo au clic sur un dot.
+        data[i].addEventListener('click',function(e) {
+          e.stopPropagation();
+        },false);
+
+        // Si le temps de la video est égale au data-time..
+        if(data_time == current && theLast != dot) {
 
           console.log(dot+' '+theLast);
           theLast = dot;
+          // on push l'élement sur le mobile.
           socket.emit('desktop event',data[i].innerHTML);
           UI.bounce();
-          // 
         }
       }
     }
@@ -279,6 +298,8 @@ var model = {
       video.currentTime=(e.offsetX*video.duration/this.offsetWidth).toPrecision(3);
     }
 
+
+    // Set de la fonction Play/Pause
     function playPause() {
       if(video.paused) {
         video.play();
@@ -292,6 +313,7 @@ var model = {
       }
     }
 
+    // Set de la fonction MuteOn/muteOff
     function playerMuted() {
       if(video.muted == false) {
         video.muted = true;
@@ -309,12 +331,12 @@ var model = {
   },
   initLocalStorage : function(){
     for (var i = 1; i < 9; i++) {
-      if(!localStorage.getItem(i)){
+      if(!localStorage.getItem(i)){ // Si les keys n'existent pas déjà
         localStorage.setItem(i,"no");
       }
     };
   },
-  setViewed : function(href){
+  setViewed : function(href){ // La vidéo vient d'être vue, modification du localStorage
     var splited = href.split('sk_');
     splited = splited[1];
     console.log(splited);

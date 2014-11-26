@@ -9,14 +9,11 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta property="og:type" content="Documentary" />
-    <meta property="og:description" content="Skateboarding is a state of mind, a life style. For its practitioners, skateboarding is a way of everyday evader: feel free.
-Here are their stories, their histories, and their escape road." />
-	<meta property="og:url"
-content="http://www.escaperoad.net" />
+    <meta property="og:description" content="Skateboarding is a state of mind, a life style. For its practitioners, skateboarding is a way of everyday evader: feel free. Here are their stories, their histories, and their escape road." />
+	<meta property="og:url" content="http://www.escaperoad.net" />
 	<meta property="og:site_name" content="The Escape Road"/>
 	<meta property="og:title" content="The Escape Road"/>
-	<meta property="og:image"
-content="img/logo_v1.png" />
+	<meta property="og:image" content="img/logo_v1.png" />
 
 
 </head>
@@ -24,7 +21,7 @@ content="img/logo_v1.png" />
     <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : 'your-app-id',
+          appId      : '',
           xfbml      : true,
           version    : 'v2.1'
         });
@@ -43,6 +40,8 @@ content="img/logo_v1.png" />
 		window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
 	</script>
 
+	<div id="loader"><div class="loader"><img src="img/logo_v1.png" alt="logo"/><h1>Loading...</h1></div></div>
+	<div class="resize"><div class="loader"><img src="img/resize.png" alt="logo"/><h1>Sorry, you have to resize your navigator :(</h1></div></div>
 	<nav style="opacity:0;" id='menu-toggle'>
 		<div id='menu-all'>
 			<div id='menu-icon'>
@@ -53,17 +52,17 @@ content="img/logo_v1.png" />
 		</div>
 		<div class='cache-menu'>
 			<ul class="menu-items menu-off">
-				<li><a href='after_intro' data-direction='bottom' class='nextContent'>[Random History]</a></li>
-				<li><a href='the_map' data-direction='bottom' class='nextContent'>[The RoadMap]</a></li>
-				<li><a href='support' data-direction='bottom' class='nextContent'>[Support them]</a></li>
-				<li style="position:absolute;right:120px;top:-2px;"><div class="fb-share-button" data-href="https://escaperoad.net" data-layout="button_count"></div></li>
-				<li style="position:absolute;right:-15px;top:-2px;"><a class="twitter-share-button" href="https://twitter.com/share">Tweet</a></li>
+				<li><a href='after_intro' data-direction='bottom' class='nextContent hover-menu-li'>Random History</a></li>
+				<li><a href='the_map' data-direction='bottom' class='nextContent hover-menu-li'>The Roadmap</a></li>
+				<li><a href='support' data-direction='bottom' class='nextContent hover-menu-li'>Support Them</a></li>
+				<li><a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://alexandre-ferraille.fr/TheEscapeRoad/" onclick="open('https://www.facebook.com/sharer/sharer.php?u=http://alexandre-ferraille.fr/TheEscapeRoad/', 'Popup', 'scrollbars=1,resizable=1,height=360,width=570, display=block, margin=0 auto');return false;"></a></li>
+				<li><a class="twitter" href="https://twitter.com/share//alexandre-ferraille.fr/TheEscapeRoad/" onclick="open('https://twitter.com/share?u=http://alexandre-ferraille.fr/TheEscapeRoad/', 'Popup', 'scrollbars=1,resizable=1,height=360,width=570, display=block');return false;"></a></li>
 			</ul>
 		</div>
 	</nav>
 	<div id="io-connect" style="opacity:0;">
 		<span class="io-channel"></span>
-		<img class="io-img" src="img/smartphone.png" alt="Connection avec un smartphone" title="Connection avec un smartphone" />
+		<img class="io-img" src="img/smartphone.png" alt="Connect with your smartphone" title="Connect with your smartphone" />
 	</div>
 	<div id="io-info">
 		<div id='io-icon'>
@@ -72,8 +71,8 @@ content="img/logo_v1.png" />
 		</div>
 
 		<div class="io-info">
-			<h1>Augmentez l'expérience "The Escape Road"</h1>
-			<p>Depuis votre smartphone, accédez à <br /><br /><span class="underline">escaperoad.net/mobile</span><br /><br />Saisissez les quatres chiffres suivant pour recevoir des informations complémentaires en temps réel !
+			<h1>Increase the experience "The Escape Road"</h1>
+			<p>From your smartphone, go to:<br /><br /><span class="underline">alexandre-ferraille.fr/TheEscapeRoad/mobile</span><br /><br />Enter the four following digits to receive additional information in real time !
 			</p>
 			<span class="io-number"></span>
 
@@ -96,7 +95,7 @@ content="img/logo_v1.png" />
 		<div id="textIntro">
 				<img src="img/logo_v1.png" alt="logo">
 
-				<p>Skateboarding is a state of mind, a life style. For its practitioners, skateboarding is a way of everyday evader: feel free.
+				<p>Skateboarding is a state of mind, a lifestyle. For its practitioners, skateboarding is a way of everyday evader: feel free.
 Here are their stories, their histories, and their escape road.
 				</p>
 				<div id="buttonStart">

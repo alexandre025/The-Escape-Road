@@ -2,7 +2,8 @@
 
 var UI = {
 	endLoader : function(){
-		
+		var loader = document.getElementById('loader');
+		loader.style.cssText='opacity:0;-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-ms-transition: all 0.5s linear;-o-transition: all 0.5s linear;transition: all 0.5s linear;z-index:-999';
 	},
 	setRoomID : function(){
 		document.getElementsByClassName('io-channel')[0].innerHTML = roomID;
@@ -93,7 +94,7 @@ var UI = {
 		  ['inc/sk_2.html','<div class="marker-content"><strong>This Ain\'t California</strong><span>Skateboarding in East Berlin (GDR), Germany</span><em>Discover it!</em></div>', 52.5200066, 13.4049540, 2],
 		  ['inc/sk_3.html','<div class="marker-content"><strong>Skateboarding in India</strong><span>Skateboarding in Bangalore, India</span><em>Discover it!</em></div>', 12.9715987, 77.5945627, 3],
 		  ['inc/sk_4.html','<div class="marker-content"><strong>The Modern Skate</strong><span>Skateboarding in Dordogne, France</span><em>Discover it!</em></div>', 45.1493094, 0.7606537, 4],
-		  ['inc/sk_5.html','<div class="marker-content"><strong>Skateistan</strong><span>Skateboarding in Kabul, Afghanistan</span></div>', 34.5333330, 69.1666670, 5],
+		  ['inc/sk_5.html','<div class="marker-content"><strong>Skateistan</strong><span>Skateboarding in Kabul, Afghanistan</span><em>Discover it!</em></div>', 34.5333330, 69.1666670, 5],
 		  ['inc/sk_6.html','<div class="marker-content"><strong>I’am a Thalente</strong><span>Skateboarding in Durban, South Africa</span><em>Discover it!</em></div>', -29.8714083, 31.0304235, 6],
 		  ['inc/sk_7.html','<div class="marker-content"><strong>Youth of Yangon</strong><span>Skateboarding in Yangon, Burma</span><em>Discover it!</em></div>', 16.7808330, 96.1497220, 7],
 		  ['inc/sk_8.html','<div class="marker-content"><strong>Cuba Skate</strong><span>Skateboarding in Havana, Cuba</span><em>Discover it!</em></div>', 23.0511477, -82.3367776, 8]
@@ -105,7 +106,7 @@ var UI = {
 		}
 
 		var logoMarker = new google.maps.Marker({
-        	position: new google.maps.LatLng(50, -30),
+        	position: new google.maps.LatLng(40, -30),
         	map: map,
         	clickable: false,
         	icon: logoImage

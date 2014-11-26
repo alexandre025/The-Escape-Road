@@ -2,26 +2,26 @@
 
 var controller = {
 
-	init : function(){
+	init : function(){ // Apres le loader
 
-		UI.endLoader();
+		UI.endLoader(); // Suppression du loader
 		
-		model.connect(function(IDReturn){
+		model.connect(function(IDReturn){ // Connection au serveur
 
 			roomID = IDReturn;
-			UI.setRoomID();
+			UI.setRoomID(); // Affiche de l'id sur le site 
 			console.log('Desktop connected to private room number : '+roomID);
 		});
 
+		//Initialisation des features
 		model.initLocalStorage();
 		controller.generateAjaxLink();
 		controller.initMenu();
 		controller.initIoInfo();
-		// Initialisation de la video
 		controller.init_video_intro();
 	},
 
-	generateAjaxLink : function(){
+	generateAjaxLink : function(){ // Génération des transition sur les liens
 		var a = document.getElementsByClassName('nextContent');
 		for (var i = 0; i < a.length; i++) {
 			a[i].addEventListener('click',model.ajaxLoad,false);
@@ -29,7 +29,7 @@ var controller = {
 		};
 	},
 
-	init_video_intro : function(){ // Non MVC
+	init_video_intro : function(){ // Non MVC 
 		var video_intro = document.getElementById('video_intro');
 		var cache_video = document.getElementById('cacheVideo');
 		var mute = document.getElementById('onOff');
@@ -49,7 +49,7 @@ var controller = {
 			mute.classList.add('on');
 		}
 
-		function muted() {
+		function muted() { // Muted / Unmuted
 		 	if(video_intro.muted == false) {
 		 		video_intro.muted = true;
 		 		mute.classList.remove('on');
@@ -63,12 +63,12 @@ var controller = {
 		 	}
 		 }
 
-		function progress() {
+		function progress() { // Apparition du "start", logo et texte
 			var self = this
 			var current_time = Math.round(self.currentTime*100/self.duration);
 
 
-			if(current_time == 1) {
+			if(current_time == 5) {
 				cache_video.classList.add('cacheVideo');
 				intro.style.display="block";
 				intro.classList.add('textIntro');
@@ -77,7 +77,7 @@ var controller = {
 			
 		}
 
-		function restart(){
+		function restart(){ // Replay auto
 			video_intro.play();
 		}
 	},
@@ -99,6 +99,8 @@ var controller = {
 		},false);
 	},
 	initIoInfo : function(){ // Non MVC
+
+		//Gestion de l'infoBox concernant la connection au serveur
 		var ioConnect = document.getElementById('io-connect');
 		var ioChannel = document.getElementsByClassName('io-channel')[0];
 		var ioIcon = document.getElementById('io-icon');
@@ -120,7 +122,7 @@ var controller = {
 
 
 };
-window.addEventListener('load',function(){
-	var socket,roomID, firstTime = true;
+var socket,roomID, firstTime = true;
+window.addEventListener('load',function(){ // Loader
 	controller.init();
 },false);

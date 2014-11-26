@@ -10,7 +10,6 @@ var controller = {
 			e.preventDefault();
 
 			model.IDSubmit(function(response){
-
 				if(response == false){
 					document.getElementById('roomID').value = '';
 					UI.IDError();
