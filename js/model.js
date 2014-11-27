@@ -3,12 +3,12 @@
 var model = {
 
 	connect : function(callback){
-		socket = io.connect('http://alexandre-ferraille.local:3000');
+		socket = io.connect('http://alexandre-ferraille.local:3000'); // Connection à socket.io
 
-		socket.emit('desktop connection');
+		socket.emit('desktop connection'); // Un desktop se connecte 
 
 		socket.on('room join',function(IDReturn){
-			callback.call(this,IDReturn);
+			callback.call(this,IDReturn); // La connection a réussi et a retourné un numéro de room privé 
 		});
 
 	},
@@ -18,48 +18,47 @@ var model = {
     UI.showNavBar();
     e.preventDefault();
 
-    var video = document.querySelector('video');
+    var video = document.querySelector('video'); // On met en pause les vidéos en cour de lecture avant de les supprimer, évite des erreurs diverses
     if(video){ 
       video.pause(); 
     }
     var href = this.href;
     var splited = href.split('/');
-    splited = splited[splited.length-1];
-    console.log(splited);
-    var direction = this.getAttribute('data-direction');
-    if(splited == 'after_intro'){ // If we have the main page
+    splited = splited[splited.length-1]; // On récupère la cible du lien 
+    var direction = this.getAttribute('data-direction'); // On récupère la direction du switch
+    if(splited == 'after_intro'){ // La page après l'intro
       model.importAfterIntro(function(){
         UI.switchContent(direction);
-        if(firstTime){
+        if(firstTime){ // Si c'est la première fois, j'affiche l'infobox socket io 
           setTimeout(function(){
             UI.toggleIoInfo();
           },1000);
-          firstTime=false;
+          firstTime=false;// La prochaine fois je ne l'affiche pas
         }
       });
     }
-    else if(splited == 'the_map'){ // If we have the road map
+    else if(splited == 'the_map'){ // Roadmap
       model.importTheMap(function(){
         UI.switchContent(direction);
       });
     }
-    else if(splited == 'support'){
+    else if(splited == 'support'){ // Support
       model.importSupport(function(){
         UI.switchContent(direction);
       });
     }
-    else{ // classical content 
+    else{ // Docu
       model.importContent(href,function(){
         model.setViewed(href);
         UI.switchContent(direction);
       });
     }
   },
-  importSupport : function(callback){
+  importSupport : function(callback){ // Import de la page support 
     var xmlhttp = new XMLHttpRequest();
 
     var container = document.createElement('div');
-    container.setAttribute('id','allNodes');
+    container.setAttribute('id','allNodes'); // Création du nouveau container 
     document.getElementById('nextContent').appendChild(container);
       xmlhttp.onreadystatechange=function(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -74,18 +73,18 @@ var model = {
     callback.call(this);
 
   },
-	importContent : function(href,callback){
+	importContent : function(href,callback){ // Import d'un docu
 		var xmlhttp = new XMLHttpRequest();
 
     var container = document.createElement('div');
     container.setAttribute('id','allNodes');
-    document.getElementById('nextContent').appendChild(container);
+    document.getElementById('nextContent').appendChild(container); // Création du nouveau container 
   		xmlhttp.onreadystatechange=function(){
 	  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    	  { 
             document.getElementById("allNodes").innerHTML = xmlhttp.responseText;
-            model.docuPlayer();
-            var nextPrev = document.querySelectorAll('#after_video a.nextContent');
+            model.docuPlayer(); // Gestion de la docu affiché 
+            var nextPrev = document.querySelectorAll('#after_video a.nextContent'); // Gestion des liens de fin de docu
             for (var i = 0; i < nextPrev.length; i++) {
               nextPrev[i].addEventListener('click',model.ajaxLoad,false);
             };
@@ -98,10 +97,10 @@ var model = {
     callback.call(this);
 	},
 
-	importTheMap : function(callback){
+	importTheMap : function(callback){ // Import de la map
     var xmlhttp = new XMLHttpRequest();
 
-		var mapOptions = { // Set des maps 
+		var mapOptions = { // Set des options de la maps 
       zoom: 3,
       zoomControl: false,
       maxZoom : 4,
@@ -109,44 +108,42 @@ var model = {
       mapTypeControl: false,
       streetViewControl : false,
       panControl: false,
-      center: new google.maps.LatLng(24.071876, 15.441456)
+      center: new google.maps.LatLng(24.071876, 15.441456) // Position initiale
     };
     var container = document.createElement('div');
     var legend = document.createElement('div');
-    legend.classList.add('map-legend');
+    legend.classList.add('map-legend'); // Création de la box legend en dur car ici on ne charge pas un map.html, on créer la map avec l'api
     legend.innerHTML = '<div><img src="img/marker_grey.png"><span>To discover</span></div><div><img src="img/marker_red.png"><span>Already seen</span></div>';
-
     container.setAttribute('id','allNodes');
-    document.getElementById('nextContent').appendChild(container);
+    document.getElementById('nextContent').appendChild(container); // Création du nouveau container
+
     var map = new google.maps.Map(container,mapOptions);
     container.appendChild(legend);
 
-    UI.setMarkers(map,function(marker,href){
-      console.log(marker);
-      console.log(href);
+    UI.setMarkers(map,function(marker,href){ // On set les markers sur la map
       google.maps.event.addListener(marker, 'click', function() {
-           model.importContent(href,function(){
+           model.importContent(href,function(){ // Gestion du clique sur markers
               model.setViewed(href);
               UI.switchContent('bottom');
            });
       });
     });
 
-    xmlhttp.onreadystatechange=function(){
+    xmlhttp.onreadystatechange=function(){ // Chargement du fichier map_settings.json
       if (xmlhttp.readyState==4 && xmlhttp.status==200)
         { 
           var mapStyle =  xmlhttp.response; 
-          map.setOptions({styles: mapStyle});
+          map.setOptions({styles: mapStyle}); 
         }
     }
-    xmlhttp.open("GET",'js/map_settings.json',true);
-    xmlhttp.responseType = 'json';
+    xmlhttp.open("GET",'js/map_settings.json',true); // Contient le style de la map
+    xmlhttp.responseType = 'json'; // En JSON :)
     xmlhttp.send();
 
     callback.call(this);
 	},
 
-	importAfterIntro : function(callback){
+	importAfterIntro : function(callback){ // Import de la page "d'apres l'intro"
 		
     // Generation de deux random number
 		var left  = Math.round((Math.random()*3)+1), 
@@ -154,7 +151,6 @@ var model = {
 		do{
 			right = Math.round((Math.random()*3)+1);
 		}while(left == right); 
-    console.log(left+' '+right);
 
     var nextContent = document.getElementById('nextContent'); // Selection et création des nouveaux conteneurs
     var div = document.createElement('div');
@@ -175,13 +171,13 @@ var model = {
   		xmlhttp_left.onreadystatechange=function(){ 
 	  		if(xmlhttp_left.readyState==4 && xmlhttp_left.status==200){
           document.getElementById("left").innerHTML = xmlhttp_left.responseText;
-          allEvent(); 
+          allEvent(); // PLacé ici car requêtes asynchrones
         }
     	}
       xmlhttp_right.onreadystatechange=function(){
         if(xmlhttp_right.readyState==4 && xmlhttp_right.status==200){
           document.getElementById("right").innerHTML = xmlhttp_right.responseText;
-          allEvent();
+          allEvent(); // PLacé en double car requêtes asynchrones
         }
       }
   	
@@ -220,7 +216,7 @@ var model = {
     var playerMute = document.getElementById('playerOnOff');
     var playerReplay = document.querySelector('.playerReplay');
 
-    playerReplay.addEventListener('click',function(event){
+    playerReplay.addEventListener('click',function(event){ // Gestion du bouton replay en fin de vidéo
       event.preventDefault();
       video.play();
       UI.replayVideo();

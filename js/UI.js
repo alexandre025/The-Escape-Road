@@ -1,20 +1,20 @@
 'use.strict';
 
 var UI = {
-	endLoader : function(){
+	endLoader : function(){ // Suppression du loader 
 		var loader = document.getElementById('loader');
 		loader.style.cssText='opacity:0;-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-ms-transition: all 0.5s linear;-o-transition: all 0.5s linear;transition: all 0.5s linear;z-index:-999';
 	},
-	setRoomID : function(){
+	setRoomID : function(){ // Mise à jour de la roomID affiché sur le site 
 		document.getElementsByClassName('io-channel')[0].innerHTML = roomID;
 		document.getElementsByClassName('io-number')[0].innerHTML = roomID;
 	},
-	switchContent : function(direction){
+	switchContent : function(direction){ // Switch du contenu 
 		var previous = document.getElementById('activeContent');
 		var now = document.getElementById('nextContent');
 
 
-		if(direction == 'bottom'){
+		if(direction == 'bottom'){ // En fonction de direction, on défini le sens du slide 
 			setTimeout(function(){now.style.cssText = 'opacity:1;-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-ms-transition: all 0.5s linear;-o-transition: all 0.5s linear;transition: all 0.5s linear;';},1000);
 			previous.style.cssText = 'top:100%;-webkit-transition:top 1s;-moz-transition:top 1s;-ms-transition:top 1s;-o-transition:top 1s;transition:top 1s;';
 		}
@@ -32,37 +32,31 @@ var UI = {
 		}
 
 		setTimeout(function(){
-			var nextContent = document.createElement('div'); // Créa du nouvel nextContent
+			var nextContent = document.createElement('div'); // Création du nouvel nextContent
           	nextContent.setAttribute('id','nextContent');
           	document.body.appendChild(nextContent);
 
-          	previous.parentNode.removeChild(previous); // Supr l'ancien activeContent
+          	previous.parentNode.removeChild(previous); // Supression de l'ancien activeContent
 	      	
 			
-			var activeContent = document.createElement('div'); // Créa du nouvel activeContent
+			var activeContent = document.createElement('div'); // Création du nouvel activeContent
 			activeContent.setAttribute('id','activeContent');
 			document.body.appendChild(activeContent);
 
-			newContent = document.getElementById('allNodes');
+			newContent = document.getElementById('allNodes'); // Déplacement des éléments 
 			console.log(newContent);
 			activeContent.appendChild(newContent);
 
+			now.parentNode.removeChild(now); // Clean
 
-		 	
-			now.parentNode.removeChild(now);
-
-		    var video = document.querySelector('video');
+		    var video = document.querySelector('video'); // Autoplay de la vidéo
     		if(video){ 
       			video.play(); 
     		}
 
-
-			// console.log('transition');
-
-
-		},1500);
+		},1500);// Une fois que la transition s'est finie en UI
 	},
-	showNavBar : function(){
+	showNavBar : function(){ // Apparission de la nav bar après l'intro
 		var nav = document.getElementById('menu-toggle');
 		var ioInfo = document.getElementById('io-connect');
 		var appear ='opacity:1;-webkit-transition: all 1.5s linear;-moz-transition: all 1.5s linear;-ms-transition: all 1.5s linear;-o-transition: all 1.5s linear;transition: all 1.5s linear;';
@@ -76,20 +70,20 @@ var UI = {
 		},1500);
 	},
 
-	afterVideo : function(){
+	afterVideo : function(){ // Apparition des liens et infos à la fin du docu
 		var box = document.getElementById('after_video');
       	box.style.opacity='1';
       	box.style.zIndex='999';
 	},
-	replayVideo : function(){
+	replayVideo : function(){ // Masque des infos de fin du docu en cas de replay 
 		var box = document.getElementById('after_video');
 		box.style.opacity='0';
 		box.style.zIndex='-999';
 	},
 
-	setMarkers : function(map,callback){
+	setMarkers : function(map,callback){ 
 
-		var locations = [
+		var locations = [ // Contient l'infobulle, la position et le numéro localStorage 
 		  ['inc/sk_1.html','<div class="marker-content"><strong>MegabiSkate</strong><span>Skateboarding in Addis Abeba, Ethiopie</span><em>Discover it!</em></div>', 8.9806034, 38.7577605, 1],
 		  ['inc/sk_2.html','<div class="marker-content"><strong>This Ain\'t California</strong><span>Skateboarding in East Berlin (GDR), Germany</span><em>Discover it!</em></div>', 52.5200066, 13.4049540, 2],
 		  ['inc/sk_3.html','<div class="marker-content"><strong>Skateboarding in India</strong><span>Skateboarding in Bangalore, India</span><em>Discover it!</em></div>', 12.9715987, 77.5945627, 3],
@@ -100,24 +94,24 @@ var UI = {
 		  ['inc/sk_8.html','<div class="marker-content"><strong>Cuba Skate</strong><span>Skateboarding in Havana, Cuba</span><em>Discover it!</em></div>', 23.0511477, -82.3367776, 8]
 		];
 
-		var logoImage = {
+		var logoImage = { 
   			url : "img/logo_v1.png",
   			scaledSize: new google.maps.Size(100, 100)
 		}
 
-		var logoMarker = new google.maps.Marker({
+		var logoMarker = new google.maps.Marker({ // Mise en place du logo dans l'océan Atlantique 
         	position: new google.maps.LatLng(40, -30),
         	map: map,
         	clickable: false,
         	icon: logoImage
     	});
 
-    	var markerRed = {
+    	var markerRed = { // Marker contenu déjà vu
       		url :'./img/marker_red.png',
       		scaledSize: new google.maps.Size(35, 35)
     	}	
 
-	    var markerGrey = {
+	    var markerGrey = { // Marker contenu pas encore vu
 	      url:'./img/marker_grey.png',
 	      scaledSize: new google.maps.Size(35, 35)
 	    }
@@ -127,32 +121,32 @@ var UI = {
 		var marker, i;
 
 		for (i = 0; i < locations.length; i++) {
-		  	if(localStorage.getItem(locations[i][4])=="yes"){
+		  	if(localStorage.getItem(locations[i][4])=="yes"){ // Si le contenu est déjà vu ...
 					marker = new google.maps.Marker({
 			    	position: new google.maps.LatLng(locations[i][2], locations[i][3]),
 			    	map: map,
-			    	icon: markerRed,
+			    	icon: markerRed, // ... marker rouge 
 			  	});
 			}
 			else{
 				marker = new google.maps.Marker({
 			    	position: new google.maps.LatLng(locations[i][2], locations[i][3]),
 			    	map: map,
-			    	icon: markerGrey,
+			    	icon: markerGrey, // ... sinon marker gris 
 			  	});				
 			}
 
-		  google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+		  google.maps.event.addListener(marker, 'mouseover', (function(marker, i) { // Ajout des infobulles 
 		    return function() {
 		      infowindow.setContent(locations[i][1]);
 		      infowindow.open(map, marker);
 		    }
 		  })(marker, i));
 
-		  callback.call(this,marker,locations[i][0]);
+		  callback.call(this,marker,locations[i][0]); // Quand l'infobulle et son Marker sont crées je les retourne un à un pour les associer au l'event click
 		};
 	},
-  	toggleIoInfo : function(){
+  	toggleIoInfo : function(){ // Toggle de l'info box socket.io
     	var ioInfoBox = document.getElementById('io-info');
    	 	if(ioInfoBox.style.opacity == 0){
       		ioInfoBox.style.opacity='1';
@@ -163,7 +157,7 @@ var UI = {
       		ioInfoBox.style.zIndex='-999';      
     	}
   	},
-  	bounce : function(){
+  	bounce : function(){ // Ajoute la classe bounce au passage d'un point à envoyer au cour de la lecture du docu
   		var icon = document.querySelector('.io-img');
   		icon.classList.add('bounce');
   		setTimeout(function(){
