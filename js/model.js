@@ -3,7 +3,7 @@
 var model = {
 
 	connect : function(callback){
-		socket = io.connect('http://alexandre-ferraille.local:3000'); // Connection à socket.io
+		socket = io.connect('http://37.187.116.10:3000'); // Connection à socket.io
 
 		socket.emit('desktop connection'); // Un desktop se connecte 
 
