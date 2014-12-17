@@ -3,7 +3,7 @@
 var model = {
 
 	connect : function(callback){ // Connection à socket.io
-		this.socket = io.connect('http://alexandre-ferraille.local:3000');
+		this.socket = io.connect('http://37.187.116.10:3000');
 	},	
 	IDSubmit : function(callback){ // Envoi de l'ID saisi
 		var roomID = document.getElementById('roomID').value;
