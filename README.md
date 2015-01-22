@@ -1,15 +1,13 @@
 The-Escape-Road
 ===============
 
-Trim1 Projet Dev Front
+HETIC H3 P2017 Front-end project
 
-Le site est disponible à l'adresse suivante : 
+Web site available here :
 
 http://www.alexandre-ferraille.fr/TheEscapeRoad
 
-et
+And mobile service here :
 
 http://www.alexandre-ferraille.fr/TheEscapeRoad/mobile
 
-Note : Le serveur Node.js n'est pas encore en ligne, la fonctionnalité n'est disponible que si l'utilisateur se trouve 
-sur le même réseau local que le serveur
